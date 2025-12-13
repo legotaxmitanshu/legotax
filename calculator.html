@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prepaid Insurance Calculator | LegoTax</title>
+<style>
+body{font-family:Arial, sans-serif;background:#f4f6f8;margin:0;color:#222}
+header{background:#1f3c88;color:#fff;padding:15px 25px;font-size:22px;font-weight:bold}
+.container{max-width:1100px;margin:30px auto;background:#fff;padding:25px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+h2{text-align:center;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+label{font-weight:bold}
+input{padding:10px;border-radius:6px;border:1px solid #ccc;width:100%}
+button{padding:12px 18px;border:none;border-radius:6px;font-weight:bold;cursor:pointer}
+.add{background:#007bff;color:#fff}
+.clear{background:#dc3545;color:#fff}
+.actions{margin-top:20px;text-align:center}
+table{width:100%;border-collapse:collapse;margin-top:30px}
+th,td{border:1px solid #ccc;padding:10px;text-align:center}
+th{background:#eef2f7}
+tfoot th{background:#f7f7f7}
+footer{text-align:center;margin:30px 0;color:#666}
+</style>
+</head>
+<body>
+<header>🔰 LegoTax – Prepaid Insurance Calculator</header>
+
+<div class="container">
+<h2>Add Insurance Policy</h2>
+
+<div class="grid">
+<div><label>Policy Name</label><input id="name"></div>
+<div><label>Purchase Date</label><input type="date" id="start"></div>
+<div><label>Policy Amount</label><input type="number" id="amount"></div>
+<div><label>Duration (Years)</label><input type="number" id="years" value="1"></div>
+</div>
+
+<div class="actions">
+<button class="add" onclick="addPolicy()">Add Policy</button>
+<button class="clear" onclick="clearAll()">Clear All</button>
+</div>
+
+<table id="resultTable">
+<thead>
+<tr>
+<th>Policy</th>
+<th>Financial Year</th>
+<th>Amount Used</th>
+<th>Prepaid Balance</th>
+</tr>
+</thead>
+<tbody></tbody>
+<tfoot>
+<tr>
+<th colspan="2">TOTAL</th>
+<th id="totalUsed">0</th>
+<th id="totalPrepaid">0</th>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<footer>© LegoTax | Designed & Developed by Mitanshu</footer>
+
+<script>
+function addPolicy(){
+ const name=document.getElementById('name').value;
+ const amount=parseFloat(document.getElementById('amount').value);
+ const start=new Date(document.getElementById('start').value);
+ const years=parseInt(document.getElementById('years').value);
+ if(!name||!amount||!start||!years){alert('Please fill all fields');return}
+
+ let end=new Date(start);
+ end.setFullYear(end.getFullYear()+years);
+
+ let fyStart=new Date(start.getMonth()<3?start.getFullYear()-1:start.getFullYear(),3,1);
+ let fyEnd=new Date(fyStart.getFullYear()+1,2,31);
+
+ let totalDays=(end-start)/(1000*60*60*24);
+ let perDay=amount/totalDays;
+ let used=0;
+
+ if(start<fyEnd && end>fyStart){
+  let ps=start>fyStart?start:fyStart;
+  let pe=end<fyEnd?end:fyEnd;
+  let days=(pe-ps)/(1000*60*60*24);
+  used=days*perDay;
+ }
+
+ let prepaid=amount-used;
+
+ const row=`<tr>
+ <td>${name}</td>
+ <td>${fyStart.getFullYear()}-${fyEnd.getFullYear()}</td>
+ <td>${used.toFixed(2)}</td>
+ <td>${prepaid.toFixed(2)}</td>
+</tr>`;
+ document.querySelector('#resultTable tbody').insertAdjacentHTML('beforeend',row);
+ updateTotals();
+}
+
+function updateTotals(){
+ let tu=0,tp=0;
+ document.querySelectorAll('#resultTable tbody tr').forEach(r=>{
+  tu+=parseFloat(r.cells[2].innerText);
+  tp+=parseFloat(r.cells[3].innerText);
+ });
+ document.getElementById('totalUsed').innerText=tu.toFixed(2);
+ document.getElementById('totalPrepaid').innerText=tp.toFixed(2);
+}
+
+function clearAll(){
+ document.querySelector('#resultTable tbody').innerHTML='';
+ document.getElementById('totalUsed').innerText='0';
+ document.getElementById('totalPrepaid').innerText='0';
+}
+</script>
+</body>
+</html>
