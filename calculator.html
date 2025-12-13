@@ -11,14 +11,18 @@ header h1{margin:0;font-size:26px;display:flex;align-items:center;gap:8px;color:
 nav{display:flex;gap:28px}
 nav a{text-decoration:none;color:#0b2c4d;font-weight:600}
 nav a:hover{color:#b38b00}
-.section{max-width:1100px;margin:50px auto;padding:0 20px}
+.section{max-width:1200px;margin:50px auto;padding:0 20px}
 .calculator{background:#fff;padding:30px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
 .calculator h2{margin-top:0;color:#0b2c4d}
 label{font-weight:bold}
 input{width:100%;padding:10px;margin:8px 0 18px;border-radius:6px;border:1px solid #ccc}
-button{padding:12px 20px;background:#0b2c4d;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:600;cursor:pointer;margin-right:10px}
+button{padding:10px 16px;background:#0b2c4d;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:600;cursor:pointer;margin-right:6px}
 button:hover{background:#b38b00}
-.result{margin-top:20px;background:#eef2f6;padding:20px;border-radius:8px}
+.result{margin-top:25px}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{border:1px solid #ccc;padding:10px;text-align:center}
+th{background:#eef2f6}
+.total{font-weight:bold;background:#f9f9f9}
 footer{background:#0b2c4d;color:#fff;text-align:center;padding:20px;margin-top:60px}
 </style>
 </head>
@@ -35,7 +39,10 @@ footer{background:#0b2c4d;color:#fff;text-align:center;padding:20px;margin-top:6
 </header>
 <section class="section">
   <div class="calculator">
-    <h2>Prepaid Insurance Calculator</h2>
+    <h2>Prepaid Insurance Calculator (Multiple Policies)</h2>
+
+    <label>Insurance Name</label>
+    <input type="text" id="iname" placeholder="Policy / Company name">
 
     <label>Insurance Amount</label>
     <input type="number" id="amount" placeholder="Enter insurance amount">
@@ -52,16 +59,36 @@ footer{background:#0b2c4d;color:#fff;text-align:center;padding:20px;margin-top:6
     <label>Financial Year End</label>
     <input type="date" id="fyEnd" value="2025-03-31">
 
-    <button onclick="calculate()">Calculate</button>
-    <button onclick="clearAll()" style="background:#c0392b">Clear</button>
+    <button onclick="addPolicy()">Add Insurance</button>
+    <button onclick="clearAll()" style="background:#c0392b">Clear All</button>
 
-    <div class="result" id="result" style="display:none"></div>
+    <div class="result">
+      <table id="resultTable">
+        <thead>
+          <tr>
+            <th>Insurance</th>
+            <th>Policy Period</th>
+            <th>Used in FY</th>
+            <th>Prepaid Balance</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr class="total">
+            <td colspan="2">TOTAL</td>
+            <td id="totalUsed">0</td>
+            <td id="totalPrepaid">0</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </section>
 <footer>© LegoTax | Designed & Developed by Mitanshu</footer>
 
 <script>
-function calculate(){
+function addPolicy(){
+  const name=document.getElementById('iname').value||'Insurance';
   const amount=parseFloat(document.getElementById('amount').value);
   const purchase=new Date(document.getElementById('purchase').value);
   const years=parseInt(document.getElementById('years').value);
@@ -78,28 +105,44 @@ function calculate(){
 
   let usedDays=0;
   if(purchase<fyEnd && policyEnd>fyStart){
-    const calcStart=purchase>fyStart?purchase:fyStart;
-    const calcEnd=policyEnd<fyEnd?policyEnd:fyEnd;
-    usedDays=(calcEnd-calcStart)/(1000*60*60*24);
+    const start=purchase>fyStart?purchase:fyStart;
+    const end=policyEnd<fyEnd?policyEnd:fyEnd;
+    usedDays=(end-start)/(1000*60*60*24);
   }
 
-  const usedAmount=perDay*usedDays;
-  const prepaidAmount=amount-usedAmount;
+  const used=(perDay*usedDays);
+  const prepaid=(amount-used);
 
-  document.getElementById('result').style.display='block';
-  document.getElementById('result').innerHTML=`
-    <p><strong>Policy Period:</strong> ${purchase.toDateString()} to ${policyEnd.toDateString()}</p>
-    <p><strong>Total Policy Days:</strong> ${Math.round(totalDays)}</p>
-    <p><strong>Used in Selected FY:</strong> ₹${usedAmount.toFixed(2)}</p>
-    <p><strong>Prepaid Balance (Carry Forward):</strong> ₹${prepaidAmount.toFixed(2)}</p>
-  `;
-}
+  const row=`<tr>
+    <td>${name}</td>
+    <td>${purchase.toDateString()} to ${policyEnd.toDateString()}</td>
+    <td>${used.toFixed(2)}</td>
+    <td>${prepaid.toFixed(2)}</td>
+  </tr>`;
 
-function clearAll(){
+  document.querySelector('#resultTable tbody').innerHTML+=row;
+  updateTotals();
+
+  document.getElementById('iname').value='';
   document.getElementById('amount').value='';
   document.getElementById('purchase').value='';
   document.getElementById('years').value='';
-  document.getElementById('result').style.display='none';
+}
+
+function updateTotals(){
+  let tu=0,tp=0;
+  document.querySelectorAll('#resultTable tbody tr').forEach(r=>{
+    tu+=parseFloat(r.children[2].innerText);
+    tp+=parseFloat(r.children[3].innerText);
+  });
+  document.getElementById('totalUsed').innerText=tu.toFixed(2);
+  document.getElementById('totalPrepaid').innerText=tp.toFixed(2);
+}
+
+function clearAll(){
+  document.querySelector('#resultTable tbody').innerHTML='';
+  document.getElementById('totalUsed').innerText='0';
+  document.getElementById('totalPrepaid').innerText='0';
 }
 </script>
 </body>
