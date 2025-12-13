@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acts & Law | Legal & Tax Resources</title>
+
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -13,14 +14,46 @@
       color: #333;
     }
 
+    /* TOP NAVIGATION */
     header {
-      background-color: #1f2937;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid #ddd;
     }
 
     header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #0b2c4d;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0b2c4d;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: #b38b00;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      background-color: #1f2937;
+      color: #fff;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .page-header h2 {
       margin: 0;
       font-size: 28px;
     }
@@ -74,19 +107,29 @@
       padding: 15px 10px;
       font-size: 14px;
     }
-
-    footer a {
-      color: #93c5fd;
-      text-decoration: none;
-    }
   </style>
 </head>
+
 <body>
 
+  <!-- TOP MENU -->
   <header>
-    <h1>Acts & Law</h1>
-    <p>Important Tax, Corporate & Regulatory Laws</p>
+    <h1>🔰 LegoTax</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+      <a href="news.html">News & Updates</a>
+      <a href="tools.html">Online Tools</a>
+      <a href="acts-law.html">Acts & Law</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
+
+  <!-- PAGE TITLE -->
+  <div class="page-header">
+    <h2>Acts & Law</h2>
+    <p>Important Tax, Corporate & Regulatory Laws</p>
+  </div>
 
   <div class="container">
     <p class="intro">
@@ -110,9 +153,9 @@
       <div class="law-card">
         <h3>GST Laws</h3>
         <ul>
-          <li>Central Goods and Services Tax Act, 2017</li>
-          <li>Integrated Goods and Services Tax Act, 2017</li>
-          <li>State Goods and Services Tax Acts</li>
+          <li>CGST Act, 2017</li>
+          <li>IGST Act, 2017</li>
+          <li>State GST Acts</li>
           <li>GST Rules & Notifications</li>
         </ul>
       </div>
@@ -122,9 +165,8 @@
         <ul>
           <li>Factories Act, 1948</li>
           <li>Payment of Wages Act, 1936</li>
-          <li>Employees' Provident Funds Act, 1952</li>
-          <li>Employees' State Insurance Act, 1948</li>
-          <li>Code on Wages, 2019</li>
+          <li>EPF Act, 1952</li>
+          <li>ESI Act, 1948</li>
         </ul>
       </div>
 
@@ -132,9 +174,8 @@
         <h3>Company & Corporate Laws</h3>
         <ul>
           <li>Companies Act, 2013</li>
-          <li>Companies Rules</li>
-          <li>Limited Liability Partnership Act, 2008</li>
-          <li>Secretarial Standards (SS-1 & SS-2)</li>
+          <li>LLP Act, 2008</li>
+          <li>Secretarial Standards</li>
         </ul>
       </div>
 
@@ -142,36 +183,25 @@
         <h3>SEBI Laws</h3>
         <ul>
           <li>SEBI Act, 1992</li>
-          <li>SEBI (LODR) Regulations, 2015</li>
-          <li>SEBI (ICDR) Regulations</li>
-          <li>SEBI (PIT) Regulations</li>
+          <li>LODR Regulations</li>
+          <li>ICDR Regulations</li>
         </ul>
       </div>
 
       <div class="law-card">
         <h3>IFSC Laws</h3>
         <ul>
-          <li>International Financial Services Centres Authority Act, 2019</li>
-          <li>IFSC Regulations & Guidelines</li>
+          <li>IFSCA Act, 2019</li>
+          <li>IFSC Guidelines</li>
         </ul>
       </div>
 
       <div class="law-card">
         <h3>RBI & Banking Laws</h3>
         <ul>
-          <li>Reserve Bank of India Act, 1934</li>
+          <li>RBI Act, 1934</li>
           <li>Banking Regulation Act, 1949</li>
-          <li>Foreign Exchange Management Act, 1999 (FEMA)</li>
-        </ul>
-      </div>
-
-      <div class="law-card">
-        <h3>Other Important Laws</h3>
-        <ul>
-          <li>Insolvency and Bankruptcy Code, 2016</li>
-          <li>Prevention of Money Laundering Act, 2002</li>
-          <li>Information Technology Act, 2000</li>
-          <li>Benami Transactions (Prohibition) Act, 1988</li>
+          <li>FEMA, 1999</li>
         </ul>
       </div>
 
@@ -179,7 +209,7 @@
   </div>
 
   <footer>
-    <p>© 2025 Your Website Name | Acts & Law</p>
+    <p>© 2025 LegoTax | Acts & Law</p>
   </footer>
 
 </body>
