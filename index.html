@@ -1,160 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LegoTax | Your Compliance Partner</title>
-<style>
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f4f6f9;
-    color:#1a1a1a;
-}
-
-/* HEADER */
-header{
-    background:#ffffff;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:18px 40px;
-    border-bottom:1px solid #ddd;
-}
-
-header h1{
-    margin:0;
-    font-size:26px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:#0b2c4d;
-}
-
-nav{
-    display:flex;
-    gap:28px;
-}
-
-nav a{
-    text-decoration:none;
-    color:#0b2c4d;
-    font-weight:600;
-}
-
-nav a:hover{
-    color:#b38b00;
-}
-
-/* HERO SECTION */
-.hero{
-    background:linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c');
-    background-size:cover;
-    background-position:center;
-    color:#ffffff;
-    text-align:center;
-    padding:120px 20px;
-}
-
-.hero h2{
-    font-size:42px;
-    margin-bottom:10px;
-}
-
-.hero p{
-    font-size:20px;
-    max-width:800px;
-    margin:auto;
-}
-
-/* SECTIONS */
-.section{
-    max-width:1100px;
-    margin:60px auto;
-    padding:0 20px;
-}
-
-.section h3{
-    font-size:30px;
-    margin-bottom:20px;
-    color:#0b2c4d;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:#ffffff;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
-}
-
-.card h4{
-    margin-top:0;
-    color:#0b2c4d;
-}
-
-/* FOOTER */
-footer{
-    background:#0b2c4d;
-    color:#ffffff;
-    text-align:center;
-    padding:20px;
-    margin-top:60px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LegoTax – Practical Tax, Compliance & Capital Market Knowledge Platform</title>
+  <meta name="description" content="LegoTax provides practical GST, Income Tax, TDS, business compliance and capital market knowledge for Indian businesses, professionals and investors.">
+  <meta name="keywords" content="GST India, Income Tax India, TDS compliance, tax notices, capital market basics, share market taxation, securities market India">
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; line-height: 1.6; color: #222; }
+    header { background: #0b3c5d; color: #fff; padding: 40px 20px; }
+    header h1 { margin: 0 0 10px; font-size: 32px; }
+    header p { font-size: 18px; max-width: 900px; }
+    nav { background: #f4f6f8; padding: 12px 20px; }
+    nav a { margin-right: 15px; text-decoration: none; color: #0b3c5d; font-weight: bold; }
+    section { padding: 40px 20px; max-width: 1100px; margin: auto; }
+    h2 { color: #0b3c5d; margin-bottom: 10px; }
+    h3 { color: #1c6ea4; }
+    .box { background: #f9f9f9; padding: 20px; margin-bottom: 25px; border-left: 4px solid #0b3c5d; }
+    .cta { background: #0b3c5d; color: #fff; padding: 25px; text-align: center; }
+    .cta a { background: #fff; color: #0b3c5d; padding: 12px 18px; text-decoration: none; font-weight: bold; border-radius: 4px; }
+    footer { background: #222; color: #ccc; padding: 30px 20px; font-size: 14px; }
+  </style>
 </head>
 <body>
 
 <header>
-    <h1>🔰 LegoTax</h1>
-   <nav>
-  <a href="index.html">Home</a>
-  <a href="services.html">Our Services</a>
-  <a href="news.html">News & Updates</a>
-  <a href="tools.html">Online Tools</a>
-  <a href="acts-law.html">Acts & Law</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <h1>LegoTax</h1>
+  <p>Your Practical Knowledge Partner for Tax, Compliance & Capital Markets in India</p>
 </header>
 
-<section class="hero">
-    <h2>Your Compliance Partner</h2>
-    <p>Professional Taxation, Legal & Compliance Solutions for Individuals and Businesses across India.</p>
+<nav>
+  <a href="#gst">GST</a>
+  <a href="#income-tax">Income Tax</a>
+  <a href="#tds">TDS</a>
+  <a href="#business">Business Compliance</a>
+  <a href="#capital">Capital Market</a>
+  <a href="tools.html">Tools</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<section>
+  <h2>About LegoTax</h2>
+  <p>LegoTax is an independent Indian knowledge platform focused on <strong>practical tax compliance and financial understanding</strong>. Built with over <strong>8+ years of real accounting and compliance experience</strong>, this platform explains not only what the law says, but how it works in real life.</p>
 </section>
 
-<section class="section">
-    <h3>What We Do</h3>
-    <div class="cards">
-        <div class="card">
-            <h4>Taxation Services</h4>
-            <p>Income Tax, GST, TDS, returns filing and advisory services.</p>
-        </div>
-        <div class="card">
-            <h4>Legal & Compliance</h4>
-            <p>ROC compliance, company law, documentation and regulatory support.</p>
-        </div>
-        <div class="card">
-            <h4>Online Tools</h4>
-            <p>Smart calculators and compliance tools to simplify your work.</p>
-        </div>
-    </div>
+<section>
+  <h2>Why LegoTax is Different</h2>
+  <div class="box">
+    <h3>Practical & Experience-Based</h3>
+    <p>We focus on real problems like mismatches, late fees, notices, penalties and corrections — not just definitions.</p>
+  </div>
+  <div class="box">
+    <h3>Simple Language</h3>
+    <p>Complex tax and financial laws explained in clear, step-by-step format for Indian users.</p>
+  </div>
+  <div class="box">
+    <h3>India-Specific Focus</h3>
+    <p>All guidance is aligned with Indian laws, portals and regulators like GSTN, Income Tax Department, MCA and SEBI.</p>
+  </div>
 </section>
 
-<section class="section">
-    <h3>Why LegoTax</h3>
-    <p>At LegoTax, we combine legal expertise, taxation knowledge and technology to deliver reliable, transparent and timely solutions.</p>
+<section id="gst">
+  <h2>GST (Goods & Services Tax)</h2>
+  <ul>
+    <li>GST Registration & Cancellation</li>
+    <li>GSTR-1, GSTR-3B, GSTR-9 filing</li>
+    <li>Late fee & interest calculation</li>
+    <li>GST notice reply formats</li>
+    <li>Common GST mistakes & corrections</li>
+  </ul>
+</section>
+
+<section id="income-tax">
+  <h2>Income Tax</h2>
+  <ul>
+    <li>ITR filing (salaried & self-employed)</li>
+    <li>Old vs New tax regime</li>
+    <li>Deductions & exemptions</li>
+    <li>Income tax notices & replies</li>
+    <li>Refund issues & rectification</li>
+  </ul>
+</section>
+
+<section id="tds">
+  <h2>TDS & TCS Compliance</h2>
+  <ul>
+    <li>TDS applicability & rates</li>
+    <li>Return filing & due dates</li>
+    <li>Interest & penalty calculation</li>
+    <li>Correction statements & notices</li>
+  </ul>
+</section>
+
+<section id="business">
+  <h2>Business & Company Compliance</h2>
+  <ul>
+    <li>Proprietorship, Partnership, LLP & Company basics</li>
+    <li>MCA filings & statutory compliance</li>
+    <li>MSME, PAN, TAN registrations</li>
+  </ul>
+</section>
+
+<section id="capital">
+  <h2>Capital Market & Securities Market</h2>
+  <p>Understanding investments, taxation and compliance in Indian capital markets.</p>
+  <ul>
+    <li>Basics of share market & securities market</li>
+    <li>Taxation of capital gains (equity & mutual funds)</li>
+    <li>STT, dividend taxation & reporting</li>
+    <li>Investor compliance & disclosures</li>
+    <li>SEBI regulations – simplified explanations</li>
+  </ul>
+  <p><em>Disclaimer: Capital market content is for educational purposes only and does not constitute investment advice.</em></p>
+</section>
+
+<section class="cta">
+  <h2>Need Practical Help?</h2>
+  <p>Get assistance with GST, Income Tax, compliance issues or technical queries.</p>
+  <a href="contact.html">Contact LegoTax</a>
 </section>
 
 <footer>
-    © LegoTax | Designed & Developed by Mitanshu
+  <p>© 2025 LegoTax.in | Educational & Compliance Knowledge Platform</p>
+  <p>Disclaimer: Content is for informational purposes only and should not be considered legal, tax or investment advice.</p>
 </footer>
 
 </body>
 </html>
-
