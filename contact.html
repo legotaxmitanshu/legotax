@@ -1,53 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LegoTax | Contact Us</title>
-<style>
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f9;color:#1a1a1a}
-header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid #ddd}
-header h1{margin:0;font-size:26px;display:flex;align-items:center;gap:8px;color:#0b2c4d}
-nav{display:flex;gap:28px}
-nav a{text-decoration:none;color:#0b2c4d;font-weight:600}
-nav a:hover{color:#b38b00}
-.hero{background:#eef2f6;padding:70px 20px;text-align:center}
-.hero h2{font-size:36px;margin-bottom:10px;color:#0b2c4d}
-.hero p{font-size:18px;max-width:900px;margin:auto}
-.section{max-width:900px;margin:60px auto;padding:0 20px}
-.card{background:#fff;padding:30px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.card h3{margin-top:0;color:#0b2c4d}
-.contact-item{margin:15px 0;font-size:18px}
-.contact-item a{text-decoration:none;color:#0b2c4d;font-weight:600}
-.contact-item a:hover{color:#b38b00}
-footer{background:#0b2c4d;color:#fff;text-align:center;padding:20px;margin-top:60px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us – LegoTax</title>
+
+  <meta name="description" content="Contact LegoTax for GST, Income Tax, TDS, Company Law and compliance support.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: #1f2933; }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0b3c5d;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    header {
+      padding: 140px 20px 60px;
+      background: #f4f6f8;
+    }
+
+    section { padding: 60px 20px; }
+    .container { max-width: 1200px; margin: auto; }
+
+    .section-title {
+      font-size: 34px;
+      color: #0b3c5d;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      max-width: 800px;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    form {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+
+    button {
+      background: #0b3c5d;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .whatsapp {
+      display: inline-block;
+      margin-top: 20px;
+      background: #25D366;
+      color: #fff;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+  </style>
 </head>
+
 <body>
+
+<nav>
+  <div class="nav-container">
+    <strong>LegoTax</strong>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="acts-law.html">Acts & Rules</a>
+      <a href="articles.html">Articles / Blogs</a>
+      <a href="news.html">News & Updates</a>
+      <a href="tools.html">Tools</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
 <header>
-  <h1>🔰 LegoTax</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="services.html">Our Services</a>
-    <a href="news.html">News & Updates</a>
-    <a href="tools.html">Online Tools</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <div class="container">
+    <h1 class="section-title">Contact Us</h1>
+    <p class="section-sub">
+      Get in touch for GST, Income Tax, TDS, Company Law and compliance support.
+    </p>
+  </div>
 </header>
-<section class="hero">
-  <h2>Contact Us</h2>
-  <p>Get in touch with LegoTax for taxation, compliance and advisory support.</p>
-</section>
-<section class="section">
-  <div class="card">
-    <h3>Reach Us</h3>
-    <div class="contact-item">📞 Phone: <a href="tel:8076054114">8076054114</a></div>
-    <div class="contact-item">✉️ Email: <a href="mailto:support@legotax.in">support@legotax.in</a></div>
-    <div class="contact-item">⏰ Business Hours: Monday – Saturday, 10:00 AM – 6:00 PM</div>
-<div class="contact-item">📍 Address: Vishwas Nagar, Shahdara, Delhi – 110032</div>
+
+<section>
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- EMAIL FORM -->
+      <form action="mailto:support@legotax.in" method="post" enctype="text/plain">
+        <input type="text" name="Name" placeholder="Your Name" required>
+        <input type="email" name="Email" placeholder="Your Email" required>
+        <input type="text" name="Phone" placeholder="Phone Number">
+        <textarea name="Message" rows="5" placeholder="Your Query" required></textarea>
+        <button type="submit">Send Email</button>
+      </form>
+
+      <!-- CONTACT INFO -->
+      <div>
+        <h3>Direct Contact</h3>
+        <p>Email: support@legotax.in</p>
+        <p>Phone / WhatsApp: +91 8076054114</p>
+
+        <a class="whatsapp" 
+           href="https://wa.me/918076054114?text=Hello%20LegoTax,%20I%20have%20a%20query" 
+           target="_blank">
+           Chat on WhatsApp
+        </a>
+      </div>
+
+    </div>
   </div>
 </section>
-<footer>© LegoTax | Designed & Developed by Mitanshu</footer>
-</body>
 
+<footer>
+  <div class="container">
+    <p>© 2025 LegoTax.in</p>
+    <p>Disclaimer: Submitting this form does not create a professional-client relationship.</p>
+  </div>
+</footer>
+
+</body>
 </html>
