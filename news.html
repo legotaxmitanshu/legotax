@@ -1,58 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LegoTax | News & Updates</title>
-<style>
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f9;color:#1a1a1a}
-header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid #ddd}
-header h1{margin:0;font-size:26px;display:flex;align-items:center;gap:8px;color:#0b2c4d}
-nav{display:flex;gap:28px}
-nav a{text-decoration:none;color:#0b2c4d;font-weight:600}
-nav a:hover{color:#b38b00}
-.hero{background:#eef2f6;padding:70px 20px;text-align:center}
-.hero h2{font-size:36px;margin-bottom:10px;color:#0b2c4d}
-.hero p{font-size:18px;max-width:900px;margin:auto}
-.section{max-width:1100px;margin:60px auto;padding:0 20px}
-.news-item{background:#fff;padding:25px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.08);margin-bottom:25px}
-.news-item h3{margin-top:0;color:#0b2c4d}
-.news-item span{font-size:14px;color:#666}
-footer{background:#0b2c4d;color:#fff;text-align:center;padding:20px;margin-top:60px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News & Updates – LegoTax</title>
+
+  <meta name="description" content="Latest GST, Income Tax, TDS, MCA and regulatory updates for professionals and businesses in India.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: #1f2933; line-height: 1.7; }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0b3c5d;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    header {
+      padding: 140px 20px 60px;
+      background: #f4f6f8;
+    }
+
+    section { padding: 60px 20px; }
+    .container { max-width: 1200px; margin: auto; }
+
+    .section-title {
+      font-size: 34px;
+      color: #0b3c5d;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      max-width: 800px;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .update {
+      background: #ffffff;
+      padding: 25px;
+      border-left: 5px solid #0b3c5d;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .update h3 {
+      color: #0b3c5d;
+      margin-bottom: 8px;
+    }
+
+    .update small {
+      color: #777;
+      font-size: 13px;
+    }
+
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+  </style>
 </head>
+
 <body>
+
+<nav>
+  <div class="nav-container">
+    <strong>LegoTax</strong>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="acts-law.html">Acts & Rules</a>
+      <a href="articles.html">Articles / Blogs</a>
+      <a href="news.html">News & Updates</a>
+      <a href="tools.html">Tools</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
 <header>
-  <h1>🔰 LegoTax</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="services.html">Our Services</a>
-    <a href="news.html">News & Updates</a>
-    <a href="tools.html">Online Tools</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <div class="container">
+    <h1 class="section-title">News & Updates</h1>
+    <p class="section-sub">
+      Latest regulatory updates, notifications and important announcements
+      under GST, Income Tax, TDS, MCA and other laws.
+    </p>
+  </div>
 </header>
-<section class="hero">
-  <h2>News & Updates</h2>
-  <p>Latest updates on taxation, compliance, regulatory changes and important announcements.</p>
+
+<section>
+  <div class="container">
+
+    <div class="update">
+      <h3>GST Return Due Date Extended</h3>
+      <small>GST | 12 June 2025</small>
+      <p>Government has extended the due date for filing GSTR-3B for specified states.</p>
+    </div>
+
+    <div class="update">
+      <h3>Income Tax Return Utility Released</h3>
+      <small>Income Tax | 5 June 2025</small>
+      <p>CBDT has released updated ITR utilities for AY 2025-26.</p>
+    </div>
+
+    <div class="update">
+      <h3>MCA Form AOC-4 Deadline Reminder</h3>
+      <small>MCA | 28 May 2025</small>
+      <p>Companies are advised to file AOC-4 within statutory timelines to avoid penalties.</p>
+    </div>
+
+    <div class="update">
+      <h3>TDS Interest Rate Clarification</h3>
+      <small>TDS | 15 May 2025</small>
+      <p>Clarification issued on calculation of interest for delayed TDS deposit.</p>
+    </div>
+
+  </div>
 </section>
-<section class="section">
-  <div class="news-item">
-    <h3>Income Tax Due Date Extension</h3>
-    <span>April 2025</span>
-    <p>The Income Tax Department has announced revised due dates for certain categories of taxpayers.</p>
+
+<footer>
+  <div class="container">
+    <p>© 2025 LegoTax.in</p>
+    <p>Disclaimer: Updates are informational summaries. Refer official notifications for accuracy.</p>
   </div>
-  <div class="news-item">
-    <h3>GST Compliance Update</h3>
-    <span>March 2025</span>
-    <p>Important changes introduced in GST return filing and reconciliation procedures.</p>
-  </div>
-  <div class="news-item">
-    <h3>Corporate Law Amendment</h3>
-    <span>February 2025</span>
-    <p>Recent amendments under Companies Act impacting annual filings and disclosures.</p>
-  </div>
-</section>
-<footer>© LegoTax | Designed & Developed by Mitanshu</footer>
+</footer>
+
 </body>
 </html>
