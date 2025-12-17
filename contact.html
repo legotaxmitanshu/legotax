@@ -138,14 +138,29 @@
   <div class="container">
     <div class="contact-grid">
 
-      <!-- EMAIL FORM -->
-      <form action="mailto:support@legotax.in" method="post" enctype="text/plain">
-        <input type="text" name="Name" placeholder="Your Name" required>
-        <input type="email" name="Email" placeholder="Your Email" required>
-        <input type="text" name="Phone" placeholder="Phone Number">
-        <textarea name="Message" rows="5" placeholder="Your Query" required></textarea>
-        <button type="submit">Send Email</button>
+      <!-- SECURE FORM -->
+      <form onsubmit="submitForm(event)">
+        <input id="name" type="text" placeholder="Your Name" required>
+        <input id="email" type="email" placeholder="Your Email" required>
+        <input id="phone" type="text" placeholder="Phone Number">
+        <textarea id="message" rows="5" placeholder="Your Query" required></textarea>
+        <button type="submit">Send Message</button>
       </form>
+
+      <script>
+        function submitForm(e){
+          e.preventDefault();
+          window.location.href = 
+            `mailto:support@legotax.in
+            ?subject=New%20Contact%20Form%20Message
+            &body=
+            Name:%20${document.getElementById('name').value}%0A
+            Email:%20${document.getElementById('email').value}%0A
+            Phone:%20${document.getElementById('phone').value}%0A
+            Message:%0A${document.getElementById('message').value}`
+            .replace(/\s+/g, '');
+        }
+      </script>
 
       <!-- CONTACT INFO -->
       <div>
