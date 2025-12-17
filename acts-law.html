@@ -3,214 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acts & Law | Legal & Tax Resources</title>
+  <title>Acts & Rules – LegoTax</title>
+
+  <meta name="description" content="Tax, GST, Corporate and Regulatory Acts & Rules library by LegoTax.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f7fa;
-      color: #333;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background:#f4f6f9; color:#1f2933; }
 
-    /* TOP NAVIGATION */
-    header {
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 40px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-      color: #0b2c4d;
-    }
-
+    /* NAVIGATION */
     nav {
-      display: flex;
-      gap: 24px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      z-index: 1000;
     }
-
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     nav a {
       text-decoration: none;
-      color: #0b2c4d;
-      font-weight: 600;
+      color: #0b3c5d;
+      margin-left: 20px;
+      font-weight: 500;
     }
 
-    nav a:hover {
-      color: #b38b00;
-    }
-
-    /* PAGE HEADER */
-    .page-header {
-      background-color: #1f2937;
-      color: #fff;
-      padding: 25px;
+    /* HEADER SECTION */
+    header {
+      padding: 140px 20px 50px;
+      background: #eef2f6;
       text-align: center;
     }
-
-    .page-header h2 {
-      margin: 0;
-      font-size: 28px;
+    header h1 {
+      font-size: 36px;
+      color: #0b3c5d;
+    }
+    header p {
+      margin-top: 6px;
+      font-size: 18px;
+      color: #555;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 0 15px;
+    /* CONTENT AREA */
+    .section {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
     }
-
-    .intro {
-      margin-bottom: 25px;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .law-grid {
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
-
-    .law-card {
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    .box {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-
-    .law-card h3 {
+    .box h3 {
       margin-top: 0;
-      color: #1f2937;
-      font-size: 18px;
-    }
-
-    .law-card ul {
-      padding-left: 18px;
-      margin: 10px 0 0 0;
-    }
-
-    .law-card ul li {
+      color: #0b3c5d;
       margin-bottom: 8px;
-      font-size: 14px;
+      font-size: 20px;
+    }
+    .box ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    .box ul li {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #444;
     }
 
+    /* FOOTER */
     footer {
-      margin-top: 40px;
-      background-color: #1f2937;
-      color: #ffffff;
+      background: #111827;
+      color: #9ca3af;
+      padding: 30px 20px;
       text-align: center;
-      padding: 15px 10px;
-      font-size: 14px;
+      margin-top: 60px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- TOP MENU -->
-  <header>
-    <h1>🔰 LegoTax</h1>
-    <nav>
+<!-- UNIVERSAL MENU -->
+<nav>
+  <div class="nav-container">
+    <strong>LegoTax</strong>
+    <div>
       <a href="index.html">Home</a>
-      <a href="services.html">Our Services</a>
+      <a href="services.html">Services</a>
+      <a href="acts-law.html">Acts & Rules</a>
+      <a href="articles.html">Articles / Blogs</a>
       <a href="news.html">News & Updates</a>
-      <a href="tools.html">Online Tools</a>
-      <a href="acts-law.html">Acts & Law</a>
+      <a href="tools.html">Tools</a>
       <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <!-- PAGE TITLE -->
-  <div class="page-header">
-    <h2>Acts & Law</h2>
-    <p>Important Tax, Corporate & Regulatory Laws</p>
-  </div>
-
-  <div class="container">
-    <p class="intro">
-      This section provides a consolidated list of important Acts and Laws commonly used by
-      Company Secretaries (CS), Tax Consultants, Chartered Accountants, and Tax Lawyers.
-      These laws are essential for corporate compliance, taxation, and regulatory advisory.
-    </p>
-
-    <div class="law-grid">
-
-      <div class="law-card">
-        <h3>Income Tax Laws</h3>
-        <ul>
-          <li>Income-tax Act, 1961</li>
-          <li>Income-tax Rules, 1962</li>
-          <li>Capital Gains Provisions</li>
-          <li>TDS & TCS Provisions</li>
-        </ul>
-      </div>
-
-      <div class="law-card">
-        <h3>GST Laws</h3>
-        <ul>
-          <li>CGST Act, 2017</li>
-          <li>IGST Act, 2017</li>
-          <li>State GST Acts</li>
-          <li>GST Rules & Notifications</li>
-        </ul>
-      </div>
-
-      <div class="law-card">
-        <h3>Labour & Employment Laws</h3>
-        <ul>
-          <li>Factories Act, 1948</li>
-          <li>Payment of Wages Act, 1936</li>
-          <li>EPF Act, 1952</li>
-          <li>ESI Act, 1948</li>
-        </ul>
-      </div>
-
-      <div class="law-card">
-        <h3>Company & Corporate Laws</h3>
-        <ul>
-          <li>Companies Act, 2013</li>
-          <li>LLP Act, 2008</li>
-          <li>Secretarial Standards</li>
-        </ul>
-      </div>
-
-      <div class="law-card">
-        <h3>SEBI Laws</h3>
-        <ul>
-          <li>SEBI Act, 1992</li>
-          <li>LODR Regulations</li>
-          <li>ICDR Regulations</li>
-        </ul>
-      </div>
-
-      <div class="law-card">
-        <h3>IFSC Laws</h3>
-        <ul>
-          <li>IFSCA Act, 2019</li>
-          <li>IFSC Guidelines</li>
-        </ul>
-      </div>
-
-      <div class="law-card">
-        <h3>RBI & Banking Laws</h3>
-        <ul>
-          <li>RBI Act, 1934</li>
-          <li>Banking Regulation Act, 1949</li>
-          <li>FEMA, 1999</li>
-        </ul>
-      </div>
-
     </div>
   </div>
+</nav>
 
-  <footer>
-    <p>© 2025 LegoTax | Acts & Law</p>
-  </footer>
+<!-- PAGE TITLE -->
+<header>
+  <h1>Acts & Rules</h1>
+  <p>A complete reference library of Indian Tax, Corporate, GST and Regulatory Laws.</p>
+</header>
+
+<section class="section">
+  <div class="grid">
+
+    <div class="box">
+      <h3>Income Tax Laws</h3>
+      <ul>
+        <li>Income-tax Act, 1961</li>
+        <li>Income-tax Rules, 1962</li>
+        <li>Capital Gains Provisions</li>
+        <li>TDS & TCS Provisions</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>GST Laws</h3>
+      <ul>
+        <li>CGST Act, 2017</li>
+        <li>IGST Act, 2017</li>
+        <li>State GST Acts</li>
+        <li>GST Rules & Notifications</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>Labour & Employment Laws</h3>
+      <ul>
+        <li>Factories Act, 1948</li>
+        <li>Payment of Wages Act, 1936</li>
+        <li>EPF Act, 1952</li>
+        <li>ESI Act, 1948</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>Company & Corporate Laws</h3>
+      <ul>
+        <li>Companies Act, 2013</li>
+        <li>LLP Act, 2008</li>
+        <li>Secretarial Standards</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>SEBI Laws</h3>
+      <ul>
+        <li>SEBI Act, 1992</li>
+        <li>LODR Regulations</li>
+        <li>ICDR Regulations</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>IFSC Laws</h3>
+      <ul>
+        <li>IFSCA Act, 2019</li>
+        <li>IFSC Guidelines</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>RBI & Banking Laws</h3>
+      <ul>
+        <li>RBI Act, 1934</li>
+        <li>Banking Regulation Act, 1949</li>
+        <li>FEMA, 1999</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 LegoTax.in</p>
+</footer>
 
 </body>
 </html>
