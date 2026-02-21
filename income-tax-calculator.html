@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Income Tax Calculator | LegoTax</title>
 
-<title>Income Tax Calculator & Computation | LegoTax</title>
-
-<!-- FONT (VERY IMPORTANT) -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -27,7 +25,6 @@ box-shadow:0 2px 10px rgba(0,0,0,.08);
 z-index:1000;
 padding:14px 0;
 }
-
 .nav-container{
 max-width:1200px;
 margin:auto;
@@ -36,7 +33,6 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 }
-
 nav a{
 text-decoration:none;
 color:#0b3c5d;
@@ -45,14 +41,14 @@ font-weight:500;
 font-size:14px;
 }
 
-/* MAIN BOX */
+/* MAIN CARD */
 .container{
-max-width:1100px;
+max-width:900px;
 margin:140px auto 40px;
 background:#fff;
 padding:30px;
-border-radius:12px;
-box-shadow:0 4px 15px rgba(0,0,0,.1);
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 h2{
@@ -61,25 +57,17 @@ color:#0b3c5d;
 margin-bottom:20px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
+label{font-weight:600;margin-top:12px;display:block;}
 
-label{
-font-weight:600;
-margin-top:10px;
-display:block;
-}
-
-input,select{
+input{
 width:100%;
-padding:10px;
-border-radius:6px;
-border:1px solid #ccc;
+padding:11px;
+border-radius:7px;
+border:1px solid #d0d7de;
+margin-top:6px;
 }
 
+/* BUTTONS */
 button{
 margin-top:20px;
 width:100%;
@@ -87,40 +75,58 @@ padding:14px;
 background:#0b3c5d;
 color:white;
 border:none;
-border-radius:8px;
-font-size:16px;
+border-radius:10px;
+font-size:17px;
 cursor:pointer;
+transition:.25s;
+}
+button:hover{background:#082b45;}
+
+.secondary{
+background:#198754;
+display:none;
 }
 
-.print-btn{
-background:#198754;
-margin-top:10px;
+/* RESULT BOX */
+.result{
+margin-top:30px;
+padding:22px;
+border-radius:12px;
+background:#eef5ff;
+display:none;
+}
+
+.best{
+background:#e8f5e9;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+font-weight:600;
+text-align:center;
+font-size:18px;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:20px;
+margin-top:15px;
 }
-
 th,td{
-border:1px solid #ccc;
+border:1px solid #dcdcdc;
 padding:10px;
 text-align:right;
 }
-
 th{
 background:#0b3c5d;
-color:white;
+color:#fff;
 }
 
-.result{
-margin-top:30px;
-background:#eef5ff;
-padding:20px;
-border-radius:10px;
+/* PRINT ONLY RESULT */
+@media print{
+nav,button,.contact{display:none;}
+body{background:white;}
+.container{box-shadow:none;margin-top:20px;}
 }
-
 .contact{
 margin-top:25px;
 background:#e8f5e9;
@@ -128,23 +134,11 @@ padding:20px;
 border-radius:10px;
 text-align:center;
 }
-
-.whatsapp{
-display:inline-block;
-margin-top:12px;
-padding:12px 18px;
-background:#25D366;
-color:white;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
-}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav>
 <div class="nav-container">
 <strong>LegoTax</strong>
@@ -162,18 +156,8 @@ font-weight:bold;
 
 <div class="container">
 
-<h2>Income Tax Calculator & Full Computation</h2>
+<h2>Income Tax Calculator</h2>
 
-<label>Select Tax Regime</label>
-<select id="regime">
-<option value="old">Old Regime</option>
-<option value="middle">Middle Regime</option>
-<option value="new">New Regime</option>
-</select>
-
-<div class="grid">
-
-<div>
 <label>Salary Income</label>
 <input id="salary" type="number">
 
@@ -186,47 +170,26 @@ font-weight:bold;
 <label>Other Income</label>
 <input id="otherIncome" type="number">
 
-<label>Other Deductions (80C, 80D etc)</label>
+<label>Deductions (80C, 80D, Loan Interest etc)</label>
 <input id="deductions" type="number">
-</div>
 
-<div>
-<label>TDS Credit</label>
-<input id="tds" type="number">
+<button onclick="calculate()">Calculate Tax</button>
+<button id="printBtn" class="secondary" onclick="window.print()">Print / Download PDF</button>
 
-<label>Advance Tax Paid</label>
-<input id="advance" type="number">
-
-<label>Months Delay u/s 234A</label>
-<input id="delayA" type="number">
-
-<label>Months Delay u/s 234B</label>
-<input id="delayB" type="number">
-
-<label>Underpaid Advance Tax (234C)</label>
-<input id="under234C" type="number">
-</div>
-
-</div>
-
-<button onclick="calculate()">Generate Computation</button>
-<button class="print-btn" onclick="window.print()">Download / Print PDF</button>
-
-<div id="output" class="result"></div>
+<div id="resultBox" class="result"></div>
 
 <div class="contact">
 <b>Need ITR Filing / Tax Planning?</b><br>
 📞 8076054114<br>
-📧 support@legotax.in<br>
-<a class="whatsapp" href="https://wa.me/918076054114" target="_blank">Chat on WhatsApp</a>
+📧 support@legotax.in
 </div>
 
 </div>
 
 <script>
 
-function slabTax(income, slabs, rates){
-let tax=0, prev=0;
+function slab(income, slabs, rates){
+let tax=0,prev=0;
 for(let i=0;i<slabs.length;i++){
 if(income>slabs[i]){
 tax+=(slabs[i]-prev)*rates[i];
@@ -240,93 +203,77 @@ tax+=(income-prev)*rates[rates.length-1];
 return tax;
 }
 
-function calculate(){
+function regimeCalc(type, taxable){
+let slabs,rates,rebate;
 
-let regime=document.getElementById("regime").value;
+if(type=="old"){
+slabs=[250000,500000,1000000];
+rates=[0,0.05,0.20,0.30];
+rebate=500000;
+}
+if(type=="middle"){
+slabs=[300000,700000,1000000,1200000,1500000];
+rates=[0,0.05,0.10,0.15,0.20,0.30];
+rebate=700000;
+}
+if(type=="new"){
+slabs=[400000,800000,1200000,1600000,2000000,2400000];
+rates=[0,0.05,0.10,0.15,0.20,0.25,0.30];
+rebate=1200000;
+}
+
+let tax=slab(taxable,slabs,rates);
+if(taxable<=rebate) tax=0;
+
+let surcharge=0;
+if(taxable>5000000) surcharge=tax*0.10;
+
+let cess=(tax+surcharge)*0.04;
+return Math.round(tax+surcharge+cess);
+}
+
+function calculate(){
 
 let salary=+document.getElementById("salary").value||0;
 let business=+document.getElementById("business").value||0;
-let otherIncome=+document.getElementById("otherIncome").value||0;
 let house=+document.getElementById("house").value||0;
+let otherIncome=+document.getElementById("otherIncome").value||0;
 let deductions=+document.getElementById("deductions").value||0;
 
-let tds=+document.getElementById("tds").value||0;
-let advance=+document.getElementById("advance").value||0;
-let delayA=+document.getElementById("delayA").value||0;
-let delayB=+document.getElementById("delayB").value||0;
-let under234C=+document.getElementById("under234C").value||0;
+let gross=salary+business+house+otherIncome;
 
 /* STANDARD DEDUCTION */
-if(salary>0){
-if(regime==="old") deductions+=50000;
-else deductions+=75000;
-}
+let oldTaxable=Math.max(0,gross-(deductions+(salary>0?50000:0)));
+let midTaxable=Math.max(0,gross-(deductions+(salary>0?75000:0)));
+let newTaxable=Math.max(0,gross-(salary>0?75000:0));
 
-let gross=salary+business+otherIncome+house;
-let taxable=Math.max(0,gross-deductions);
+let oldTax=regimeCalc("old",oldTaxable);
+let midTax=regimeCalc("middle",midTaxable);
+let newTax=regimeCalc("new",newTaxable);
 
-/* SLABS + REBATE */
-let slabs,rates,rebateLimit;
+/* BEST REGIME */
+let best=Math.min(oldTax,midTax,newTax);
+let bestName=(best==oldTax)?"Old Regime":(best==midTax)?"Middle Regime":"New Regime";
 
-if(regime==="old"){
-slabs=[250000,500000,1000000];
-rates=[0,0.05,0.20,0.30];
-rebateLimit=500000;
-}
-else if(regime==="middle"){
-slabs=[300000,700000,1000000,1200000,1500000];
-rates=[0,0.05,0.10,0.15,0.20,0.30];
-rebateLimit=700000;
-}
-else{
-slabs=[400000,800000,1200000,1600000,2000000,2400000];
-rates=[0,0.05,0.10,0.15,0.20,0.25,0.30];
-rebateLimit=1200000;
-}
+document.getElementById("resultBox").style.display="block";
+document.getElementById("printBtn").style.display="block";
 
-let tax=slabTax(taxable,slabs,rates);
-
-/* 87A REBATE */
-if(taxable<=rebateLimit) tax=0;
-
-/* SURCHARGE */
-let surcharge=0;
-if(taxable>50000000) surcharge=tax*0.37;
-else if(taxable>20000000) surcharge=tax*0.25;
-else if(taxable>10000000) surcharge=tax*0.15;
-else if(taxable>5000000) surcharge=tax*0.10;
-
-let cess=(tax+surcharge)*0.04;
-let totalTax=tax+surcharge+cess;
-
-/* INTEREST */
-let interest234A=totalTax*0.01*delayA;
-let interest234B=totalTax*0.01*delayB;
-let interest234C=under234C*0.01*3;
-
-let grossLiability=totalTax+interest234A+interest234B+interest234C;
-let netPayable=grossLiability-(tds+advance);
-
-document.getElementById("output").innerHTML=`
+document.getElementById("resultBox").innerHTML=`
+<h3 style="text-align:center">Tax Comparison</h3>
 <table>
-<tr><th>Particulars</th><th>Amount (₹)</th></tr>
-<tr><td>Gross Total Income</td><td>${gross.toLocaleString()}</td></tr>
-<tr><td>Less: Deductions (Incl. Standard Deduction)</td><td>${deductions.toLocaleString()}</td></tr>
-<tr><td><b>Total Income</b></td><td><b>${Math.round(taxable).toLocaleString()}</b></td></tr>
-<tr><td>Income Tax</td><td>${Math.round(tax).toLocaleString()}</td></tr>
-<tr><td>Surcharge</td><td>${Math.round(surcharge).toLocaleString()}</td></tr>
-<tr><td>Health & Education Cess 4%</td><td>${Math.round(cess).toLocaleString()}</td></tr>
-<tr><td><b>Total Tax Liability</b></td><td><b>${Math.round(totalTax).toLocaleString()}</b></td></tr>
-<tr><td>Interest u/s 234A</td><td>${Math.round(interest234A).toLocaleString()}</td></tr>
-<tr><td>Interest u/s 234B</td><td>${Math.round(interest234B).toLocaleString()}</td></tr>
-<tr><td>Interest u/s 234C</td><td>${Math.round(interest234C).toLocaleString()}</td></tr>
-<tr><td><b>Gross Liability</b></td><td><b>${Math.round(grossLiability).toLocaleString()}</b></td></tr>
-<tr><td>Less: TDS + Advance Tax</td><td>${(tds+advance).toLocaleString()}</td></tr>
-<tr><th>Net Payable / (Refund)</th><th>${Math.round(netPayable).toLocaleString()}</th></tr>
+<tr><th>Regime</th><th>Tax Payable (₹)</th></tr>
+<tr><td>Old Regime</td><td>${oldTax.toLocaleString()}</td></tr>
+<tr><td>Middle Regime</td><td>${midTax.toLocaleString()}</td></tr>
+<tr><td>New Regime</td><td>${newTax.toLocaleString()}</td></tr>
 </table>
+
+<div class="best">
+Best Option: ${bestName} <br>
+You Save ₹ ${(Math.max(oldTax,midTax,newTax)-best).toLocaleString()}
+</div>
 `;
 }
-</script>
 
+</script>
 </body>
 </html>
