@@ -123,6 +123,19 @@ work+=`Above ₹${prev.toLocaleString()} @${rates[rates.length-1]*100}% = ₹${M
 return [tax,work];
 }
 
+// NEW FUNCTION: detect income type for print/excel
+function getIncomeType(salary, business, house, otherIncome){
+    let types = [];
+    if(salary>0) types.push("Salary Income");
+    if(business>0) types.push("Business / Professional Income");
+    if(house!==0) types.push("House Property Income");
+    if(otherIncome>0) types.push("Other Income");
+
+    if(types.length === 0) return "No Income Entered";
+    if(types.length === 1) return types[0];
+    return "Mixed Income (" + types.join(", ") + ")";
+}
+
 function calculateTax(){
 let name = document.getElementById("name").value;
 let pan = document.getElementById("pan").value;
@@ -135,8 +148,6 @@ let newBox = document.getElementById("newBox");
 let bestRegime = document.getElementById("bestRegime");
 let resultBox = document.getElementById("resultBox");
 
-clientDetails.innerHTML=`<b>Name:</b> ${name}<br><b>PAN:</b> ${pan}<br><b>Assessment Year:</b> ${ay}<hr>`;
-
 let salary=+document.getElementById("salary").value||0;
 let business=+document.getElementById("business").value||0;
 let house=+document.getElementById("house").value||0;
@@ -146,6 +157,15 @@ let tds=+document.getElementById("tds").value||0;
 let advance=+document.getElementById("advance").value||0;
 
 let grossIncome=salary+business+house+otherIncome;
+
+// GET INCOME TYPE
+let incomeType = getIncomeType(salary, business, house, otherIncome);
+
+clientDetails.innerHTML=`<b>Name:</b> ${name}<br>
+<b>PAN:</b> ${pan}<br>
+<b>Assessment Year:</b> ${ay}<br>
+<b>Income Type:</b> ${incomeType}<hr>`;
+
 document.getElementById("gross").innerHTML="<b>Gross Income:</b> ₹ "+grossIncome.toLocaleString();
 
 function regime(type){
