@@ -9,130 +9,115 @@
 
 <style>
 body{
-font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,#eef3f9,#ffffff);
-margin:0;
-color:#222;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#eef3f9,#ffffff);
+    margin:0;
+    color:#222;
 }
-
 nav{
-position:fixed;
-top:0;
-width:100%;
-background:#fff;
-box-shadow:0 2px 12px rgba(0,0,0,.08);
-z-index:1000;
-padding:14px 0;
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#fff;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+    z-index:1000;
+    padding:14px 0;
 }
 .nav-container{
-max-width:1200px;
-margin:auto;
-padding:0 20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-
 .container{
-max-width:950px;
-margin:150px auto 40px;
-background:#fff;
-padding:35px;
-border-radius:18px;
-box-shadow:0 20px 60px rgba(0,0,0,.08);
+    max-width:950px;
+    margin:150px auto 40px;
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
 }
-
 h2{text-align:center;color:#0b3c5d;margin-bottom:25px;}
-
 label{font-weight:600;margin-top:12px;display:block;}
 input{
-width:100%;
-padding:12px;
-border-radius:8px;
-border:1px solid #d0d7de;
-margin-top:6px;
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #d0d7de;
+    margin-top:6px;
 }
-
 button{
-margin-top:22px;
-width:100%;
-padding:15px;
-background:#0b3c5d;
-color:white;
-border:none;
-border-radius:10px;
-font-size:17px;
-cursor:pointer;
+    margin-top:22px;
+    width:100%;
+    padding:15px;
+    background:#0b3c5d;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    cursor:pointer;
 }
 button:hover{background:#07283f;}
-
 .result-box{
-margin-top:30px;
-padding:25px;
-border-radius:14px;
-background:#f4f9ff;
-display:none;
+    margin-top:30px;
+    padding:25px;
+    border-radius:14px;
+    background:#f4f9ff;
+    display:none;
 }
-
 .regime-box{
-background:#fff;
-padding:18px;
-border-radius:12px;
-margin-top:20px;
-box-shadow:0 6px 18px rgba(0,0,0,.05);
+    background:#fff;
+    padding:18px;
+    border-radius:12px;
+    margin-top:20px;
+    box-shadow:0 6px 18px rgba(0,0,0,.05);
 }
-
 .regime-title{
-font-weight:700;
-color:#0b3c5d;
-margin-bottom:10px;
-font-size:18px;
+    font-weight:700;
+    color:#0b3c5d;
+    margin-bottom:10px;
+    font-size:18px;
 }
-
 .summary{
-background:#e8f5e9;
-padding:15px;
-border-radius:10px;
-margin-top:20px;
-font-weight:600;
-text-align:center;
-font-size:17px;
+    background:#e8f5e9;
+    padding:15px;
+    border-radius:10px;
+    margin-top:20px;
+    font-weight:600;
+    text-align:center;
+    font-size:17px;
 }
-
 .print-btn{background:#198754;}
 .excel-btn{background:#ff9800;margin-top:10px;}
-
 table{
-width:100%;
-border-collapse:collapse;
-margin-top:12px;
+    width:100%;
+    border-collapse:collapse;
+    margin-top:12px;
 }
 th,td{
-border:1px solid #ddd;
-padding:9px;
-text-align:right;
+    border:1px solid #ddd;
+    padding:9px;
+    text-align:right;
 }
 th{background:#0b3c5d;color:white;}
-
 .client-box{
-background:#fff7e6;
-padding:15px;
-border-radius:12px;
-margin-bottom:20px;
+    background:#fff7e6;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
 }
-
 @media print{
-body *{visibility:hidden;}
-#printSection, #printSection *{visibility:visible;}
-#printSection{position:absolute;left:0;top:0;width:100%;}
+    body *{visibility:hidden;}
+    #printSection, #printSection *{visibility:visible;}
+    #printSection{position:absolute;left:0;top:0;width:100%;}
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
-
 <h2>Income Tax Calculator & Statement of Income</h2>
 
 <div class="client-box">
@@ -156,9 +141,7 @@ body *{visibility:hidden;}
 <button onclick="calculateTax()">Calculate Tax</button>
 
 <div id="resultBox" class="result-box">
-
 <div id="printSection">
-
 <h3 style="text-align:center;">STATEMENT OF INCOME</h3>
 <div id="clientDetails"></div>
 <p id="gross"></p>
@@ -168,130 +151,131 @@ body *{visibility:hidden;}
 <div id="newBox" class="regime-box"></div>
 
 <div id="bestRegime" class="summary"></div>
-
 </div>
 
 <button class="print-btn" onclick="window.print()">Print / Download PDF</button>
 <button class="excel-btn" onclick="downloadExcel()">Export Excel</button>
-
 </div>
 </div>
 
 <script>
-
+// Helper function to calculate tax based on slabs
 function slab(income, slabs, rates){
-let tax=0,prev=0,work="";
-for(let i=0;i<slabs.length;i++){
-if(income>slabs[i]){
-let part=(slabs[i]-prev)*rates[i];
-tax+=part;
-work+=`₹${prev.toLocaleString()} - ₹${slabs[i].toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
-prev=slabs[i];
-}else{
-let part=(income-prev)*rates[i];
-tax+=part;
-work+=`₹${prev.toLocaleString()} - ₹${income.toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
-return [tax,work];
-}}
-let part=(income-prev)*rates[rates.length-1];
-tax+=part;
-work+=`Above ₹${prev.toLocaleString()} @${rates[rates.length-1]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
-return [tax,work];
+    let tax=0,prev=0,work="";
+    for(let i=0;i<slabs.length;i++){
+        if(income>slabs[i]){
+            let part=(slabs[i]-prev)*rates[i];
+            tax+=part;
+            work+=`₹${prev.toLocaleString()} - ₹${slabs[i].toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
+            prev=slabs[i];
+        } else {
+            let part=(income-prev)*rates[i];
+            tax+=part;
+            work+=`₹${prev.toLocaleString()} - ₹${income.toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
+            return [tax,work];
+        }
+    }
+    let part=(income-prev)*rates[rates.length-1];
+    tax+=part;
+    work+=`Above ₹${prev.toLocaleString()} @${rates[rates.length-1]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
+    return [tax,work];
 }
 
 function calculateTax(){
+    // DOM elements
+    let name = document.getElementById("name").value;
+    let pan = document.getElementById("pan").value;
+    let ay = document.getElementById("ay").value;
 
-let name=name.value;
-let pan=pan.value;
-let ay=ay.value;
+    let clientDetails = document.getElementById("clientDetails");
+    let oldBox = document.getElementById("oldBox");
+    let midBox = document.getElementById("midBox");
+    let newBox = document.getElementById("newBox");
+    let bestRegime = document.getElementById("bestRegime");
+    let resultBox = document.getElementById("resultBox");
 
-clientDetails.innerHTML=`<b>Name:</b> ${name}<br><b>PAN:</b> ${pan}<br><b>Assessment Year:</b> ${ay}<hr>`;
+    clientDetails.innerHTML=`<b>Name:</b> ${name}<br><b>PAN:</b> ${pan}<br><b>Assessment Year:</b> ${ay}<hr>`;
 
-let salary=+document.getElementById("salary").value||0;
-let business=+document.getElementById("business").value||0;
-let house=+document.getElementById("house").value||0;
-let otherIncome=+document.getElementById("otherIncome").value||0;
-let deductions=+document.getElementById("deductions").value||0;
-let tds=+document.getElementById("tds").value||0;
-let advance=+document.getElementById("advance").value||0;
+    // Inputs
+    let salary=+document.getElementById("salary").value||0;
+    let business=+document.getElementById("business").value||0;
+    let house=+document.getElementById("house").value||0;
+    let otherIncome=+document.getElementById("otherIncome").value||0;
+    let deductions=+document.getElementById("deductions").value||0;
+    let tds=+document.getElementById("tds").value||0;
+    let advance=+document.getElementById("advance").value||0;
 
-let grossIncome=salary+business+house+otherIncome;
-document.getElementById("gross").innerHTML="<b>Gross Income:</b> ₹ "+grossIncome.toLocaleString();
+    let grossIncome=salary+business+house+otherIncome;
+    document.getElementById("gross").innerHTML="<b>Gross Income:</b> ₹ "+grossIncome.toLocaleString();
 
-function regime(type){
+    function regime(type){
+        let std=salary>0?(type==="Old"?50000:75000):0;
+        let allowedDed=(type==="New")?0:deductions;
+        let taxable=Math.max(0,grossIncome-(std+allowedDed));
 
-let std=salary>0?(type==="Old"?50000:75000):0;
-let allowedDed=(type==="New")?0:deductions;
-let taxable=Math.max(0,grossIncome-(std+allowedDed));
+        let slabs,rates,rebate;
+        if(type==="Old"){
+            slabs=[250000,500000,1000000];
+            rates=[0,0.05,0.20,0.30];
+            rebate=500000;
+        } else if(type==="Middle"){
+            slabs=[300000,700000,1000000,1200000,1500000];
+            rates=[0,0.05,0.10,0.15,0.20,0.30];
+            rebate=700000;
+        } else{
+            slabs=[400000,800000,1200000,1600000,2000000,2400000];
+            rates=[0,0.05,0.10,0.15,0.20,0.25,0.30];
+            rebate=1200000;
+        }
 
-let slabs,rates,rebate;
+        let [tax,work]=slab(taxable,slabs,rates);
+        if(taxable<=rebate) tax=0;
 
-if(type==="Old"){
-slabs=[250000,500000,1000000];
-rates=[0,0.05,0.20,0.30];
-rebate=500000;
-}
-else if(type==="Middle"){
-slabs=[300000,700000,1000000,1200000,1500000];
-rates=[0,0.05,0.10,0.15,0.20,0.30];
-rebate=700000;
-}
-else{
-slabs=[400000,800000,1200000,1600000,2000000,2400000];
-rates=[0,0.05,0.10,0.15,0.20,0.25,0.30];
-rebate=1200000;
-}
+        let cess=tax*0.04;
+        let total=Math.round(tax+cess);
+        let net=total-(tds+advance);
 
-let [tax,work]=slab(taxable,slabs,rates);
-if(taxable<=rebate) tax=0;
+        return {std,allowedDed,taxable,base:Math.round(tax),cess:Math.round(cess),total,net,work};
+    }
 
-let cess=tax*0.04;
-let total=Math.round(tax+cess);
-let net=total-(tds+advance);
+    let oldR=regime("Old");
+    let midR=regime("Middle");
+    let newR=regime("New");
 
-return {std,allowedDed,taxable,base:Math.round(tax),cess:Math.round(cess),total,net,work};
-}
+    function box(title,data){
+        return `
+        <div class="regime-title">${title} Regime</div>
+        <table>
+            <tr><td>Standard Deduction</td><td>₹ ${data.std.toLocaleString()}</td></tr>
+            <tr><td>Other Deductions</td><td>₹ ${data.allowedDed.toLocaleString()}</td></tr>
+            <tr><td>Taxable Income</td><td>₹ ${data.taxable.toLocaleString()}</td></tr>
+            <tr><td>Income Tax</td><td>₹ ${data.base.toLocaleString()}</td></tr>
+            <tr><td>Cess 4%</td><td>₹ ${data.cess.toLocaleString()}</td></tr>
+            <tr><td><b>Total Tax Liability</b></td><td><b>₹ ${data.total.toLocaleString()}</b></td></tr>
+            <tr><td>Less: TDS + Advance</td><td>₹ ${(tds+advance).toLocaleString()}</td></tr>
+            <tr><td><b>Net Payable / Refund</b></td><td><b>₹ ${data.net.toLocaleString()}</b></td></tr>
+        </table>
+        <div style="margin-top:10px;font-size:14px"><b>Slab Working:</b><br>${data.work}</div>`;
+    }
 
-let oldR=regime("Old");
-let midR=regime("Middle");
-let newR=regime("New");
+    oldBox.innerHTML=box("Old",oldR);
+    midBox.innerHTML=box("Middle",midR);
+    newBox.innerHTML=box("New",newR);
 
-function box(title,data){
-return `
-<div class="regime-title">${title} Regime</div>
-<table>
-<tr><td>Standard Deduction</td><td>₹ ${data.std.toLocaleString()}</td></tr>
-<tr><td>Other Deductions</td><td>₹ ${data.allowedDed.toLocaleString()}</td></tr>
-<tr><td>Taxable Income</td><td>₹ ${data.taxable.toLocaleString()}</td></tr>
-<tr><td>Income Tax</td><td>₹ ${data.base.toLocaleString()}</td></tr>
-<tr><td>Cess 4%</td><td>₹ ${data.cess.toLocaleString()}</td></tr>
-<tr><td><b>Total Tax Liability</b></td><td><b>₹ ${data.total.toLocaleString()}</b></td></tr>
-<tr><td>Less: TDS + Advance</td><td>₹ ${(tds+advance).toLocaleString()}</td></tr>
-<tr><td><b>Net Payable / Refund</b></td><td><b>₹ ${data.net.toLocaleString()}</b></td></tr>
-</table>
-<div style="margin-top:10px;font-size:14px"><b>Slab Working:</b><br>${data.work}</div>`;
-}
+    let min=Math.min(oldR.total,midR.total,newR.total);
+    bestRegime.innerHTML="Best Tax Saving Regime: "+(min===oldR.total?"OLD":min===midR.total?"MIDDLE":"NEW");
 
-oldBox.innerHTML=box("Old",oldR);
-midBox.innerHTML=box("Middle",midR);
-newBox.innerHTML=box("New",newR);
-
-let min=Math.min(oldR.total,midR.total,newR.total);
-bestRegime.innerHTML="Best Tax Saving Regime: "+(min===oldR.total?"OLD":min===midR.total?"MIDDLE":"NEW");
-
-resultBox.style.display="block";
+    resultBox.style.display="block";
 }
 
 function downloadExcel(){
-let text=document.getElementById("printSection").innerText;
-let blob=new Blob([text],{type:"application/vnd.ms-excel"});
-let link=document.createElement("a");
-link.href=URL.createObjectURL(blob);
-link.download="Statement_of_Income.xls";
-link.click();
+    let text=document.getElementById("printSection").innerText;
+    let blob=new Blob([text],{type:"application/vnd.ms-excel"});
+    let link=document.createElement("a");
+    link.href=URL.createObjectURL(blob);
+    link.download="Statement_of_Income.xls";
+    link.click();
 }
-
 </script>
-
 </body>
 </html>
