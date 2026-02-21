@@ -123,13 +123,13 @@ work+=`Above ₹${prev.toLocaleString()} @${rates[rates.length-1]*100}% = ₹${M
 return [tax,work];
 }
 
-// NEW FUNCTION: detect income type for print/excel
+// DETECT INCOME TYPE WITH AMOUNTS
 function getIncomeType(salary, business, house, otherIncome){
     let types = [];
-    if(salary>0) types.push("Salary Income");
-    if(business>0) types.push("Business / Professional Income");
-    if(house!==0) types.push("House Property Income");
-    if(otherIncome>0) types.push("Other Income");
+    if(salary>0) types.push("Salary: ₹"+salary.toLocaleString());
+    if(business>0) types.push("Business: ₹"+business.toLocaleString());
+    if(house!==0) types.push("House Property: ₹"+house.toLocaleString());
+    if(otherIncome>0) types.push("Other: ₹"+otherIncome.toLocaleString());
 
     if(types.length === 0) return "No Income Entered";
     if(types.length === 1) return types[0];
@@ -158,7 +158,7 @@ let advance=+document.getElementById("advance").value||0;
 
 let grossIncome=salary+business+house+otherIncome;
 
-// GET INCOME TYPE
+// GET INCOME TYPE WITH AMOUNTS
 let incomeType = getIncomeType(salary, business, house, otherIncome);
 
 clientDetails.innerHTML=`<b>Name:</b> ${name}<br>
