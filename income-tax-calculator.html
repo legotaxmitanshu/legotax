@@ -1,36 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Income Tax Computation | LegoTax</title>
+
+<style>
+body{font-family:Poppins,sans-serif;background:#f4f6f8;margin:0;color:#222;}
+nav{position:fixed;top:0;width:100%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);z-index:1000;padding:15px 0;}
+.nav-container{max-width:1200px;margin:auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
+nav a{text-decoration:none;color:#0b3c5d;margin-left:18px;font-weight:500;font-size:14px;}
+.container{max-width:1100px;margin:140px auto 40px;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.1);}
+h2{text-align:center;color:#0b3c5d;margin-bottom:20px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+label{font-weight:600;margin-top:10px;display:block;}
+input,select{width:100%;padding:10px;border-radius:6px;border:1px solid #ccc;}
+button{margin-top:20px;width:100%;padding:14px;background:#0b3c5d;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;}
+.print-btn{background:#198754;margin-top:10px;}
+table{width:100%;border-collapse:collapse;margin-top:20px;}
+th,td{border:1px solid #ccc;padding:10px;text-align:right;}
+th{background:#0b3c5d;color:white;}
+.result{margin-top:30px;background:#eef5ff;padding:20px;border-radius:10px;}
+.contact{margin-top:25px;background:#e8f5e9;padding:20px;border-radius:10px;text-align:center;}
+.whatsapp{display:inline-block;margin-top:12px;padding:12px 18px;background:#25D366;color:white;text-decoration:none;border-radius:8px;font-weight:bold;}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="nav-container">
+<strong>LegoTax</strong>
+<div>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="acts-law.html">Acts & Rules</a>
+<a href="articles.html">Articles / Blogs</a>
+<a href="news.html">News & Updates</a>
+<a href="tools.html">Tools</a>
+<a href="contact.html">Contact</a>
+</div>
+</div>
+</nav>
+
+<div class="container">
+
+<h2>Professional Income Tax Computation</h2>
+
+<label>Select Regime</label>
+<select id="regime">
+<option value="old">Old Regime</option>
+<option value="middle">Middle Regime</option>
+<option value="new">New Regime</option>
+</select>
+
+<div class="grid">
+<div>
+<label>Salary Income</label><input id="salary" type="number">
+<label>Business / Professional Income</label><input id="business" type="number">
+<label>Other Income</label><input id="otherIncome" type="number">
+<label>House Property (+/-)</label><input id="house" type="number">
+<label>Other Deductions</label><input id="deductions" type="number">
+</div>
+
+<div>
+<label>TDS Credit</label><input id="tds" type="number">
+<label>Advance Tax Paid</label><input id="advance" type="number">
+<label>Months Delay (234A)</label><input id="delayA" type="number">
+<label>Months Delay (234B)</label><input id="delayB" type="number">
+<label>Underpaid Advance Tax (234C)</label><input id="under234C" type="number">
+</div>
+</div>
+
+<button onclick="calculate()">Generate Computation</button>
+<button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+
+<div id="output" class="result"></div>
+
+<div class="contact">
+<b>Need ITR Filing / Tax Planning?</b><br>
+📞 8076054114<br>
+📧 support@legotax.in<br>
+<a class="whatsapp" href="https://wa.me/918076054114" target="_blank">Chat on WhatsApp</a>
+</div>
+
+</div>
+
 <script>
 
-// ---------- SLABS ----------
 function getRegimeData(regime){
-
 if(regime==="old"){
-return {
-slabs:[250000,500000,1000000],
-rates:[0,0.05,0.20,0.30],
-rebate:500000
-};
+return {slabs:[250000,500000,1000000],rates:[0,0.05,0.20,0.30],rebate:500000};
 }
-
 if(regime==="middle"){
-return {
-slabs:[300000,700000,1000000,1200000,1500000],
-rates:[0,0.05,0.10,0.15,0.20,0.30],
-rebate:700000
-};
+return {slabs:[300000,700000,1000000,1200000,1500000],rates:[0,0.05,0.10,0.15,0.20,0.30],rebate:700000};
+}
+return {slabs:[400000,800000,1200000,1600000,2000000,2400000],rates:[0,0.05,0.10,0.15,0.20,0.25,0.30],rebate:1200000};
 }
 
-return {
-slabs:[400000,800000,1200000,1600000,2000000,2400000],
-rates:[0,0.05,0.10,0.15,0.20,0.25,0.30],
-rebate:1200000
-};
-}
-
-// ---------- SLAB TAX ----------
 function slabTax(income, slabs, rates){
-let tax=0;
-let prev=0;
-
+let tax=0, prev=0;
 for(let i=0;i<slabs.length;i++){
 if(income>slabs[i]){
 tax+=(slabs[i]-prev)*rates[i];
@@ -40,12 +109,10 @@ tax+=(income-prev)*rates[i];
 return tax;
 }
 }
-
 tax+=(income-prev)*rates[rates.length-1];
 return tax;
 }
 
-// ---------- SURCHARGE ----------
 function surcharge(income,tax){
 if(income>50000000) return tax*0.37;
 if(income>20000000) return tax*0.25;
@@ -54,7 +121,6 @@ if(income>5000000) return tax*0.10;
 return 0;
 }
 
-// ---------- MAIN CALCULATION ----------
 function calculate(){
 
 let regime=document.getElementById("regime").value;
@@ -71,48 +137,34 @@ let delayA=+document.getElementById("delayA").value||0;
 let delayB=+document.getElementById("delayB").value||0;
 let under234C=+document.getElementById("under234C").value||0;
 
-// Standard deduction auto
-if(salary>0) deductions+=50000;
+// Standard Deduction for salary
+if(salary>0){ deductions+=50000; }
 
-// Gross Income
 let gross=salary+business+otherIncome+house;
-
-// Taxable
 let taxable=Math.max(0,gross-deductions);
 
-// Slab tax
 let data=getRegimeData(regime);
 let tax=slabTax(taxable,data.slabs,data.rates);
 
-// 87A REBATE
-if(taxable<=data.rebate){
-tax=0;
-}
+// 87A Rebate
+if(taxable<=data.rebate){ tax=0; }
 
-// Surcharge
 let sur=surcharge(taxable,tax);
-
-// Cess
 let cess=(tax+sur)*0.04;
-
 let totalTax=tax+sur+cess;
 
-// Interest
 let interest234A= totalTax*0.01*delayA;
 let interest234B= totalTax*0.01*delayB;
 let interest234C= under234C*0.01*3;
 
 let grossLiability=totalTax+interest234A+interest234B+interest234C;
-
-// Net payable
 let netPayable=grossLiability-(tds+advance);
 
-// OUTPUT
 document.getElementById("output").innerHTML=`
 <table>
 <tr><th>Particulars</th><th>Amount (₹)</th></tr>
 <tr><td>Gross Total Income</td><td>${gross.toLocaleString()}</td></tr>
-<tr><td>Less: Deductions</td><td>${deductions.toLocaleString()}</td></tr>
+<tr><td>Less: Deductions (Incl. Std Deduction)</td><td>${deductions.toLocaleString()}</td></tr>
 <tr><td><b>Total Income</b></td><td><b>${taxable.toLocaleString()}</b></td></tr>
 <tr><td>Income Tax</td><td>${Math.round(tax).toLocaleString()}</td></tr>
 <tr><td>Surcharge</td><td>${Math.round(sur).toLocaleString()}</td></tr>
@@ -129,3 +181,6 @@ document.getElementById("output").innerHTML=`
 }
 
 </script>
+
+</body>
+</html>
