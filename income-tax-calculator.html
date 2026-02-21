@@ -1,92 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LegoTax Professional Income Tax Suite</title>
-
-<style>
-body{font-family:Poppins,sans-serif;background:#f4f6f8;margin:0;color:#222;}
-nav{position:fixed;top:0;width:100%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);z-index:1000;padding:15px 0;}
-.nav-container{max-width:1200px;margin:auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
-nav a{text-decoration:none;color:#0b3c5d;margin-left:20px;font-weight:600;}
-.container{max-width:1100px;margin:120px auto 40px;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.1);}
-h2{text-align:center;color:#0b3c5d;margin-bottom:20px;}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-label{font-weight:600;margin-top:10px;display:block;}
-input,select{width:100%;padding:10px;border-radius:6px;border:1px solid #ccc;}
-button{margin-top:20px;width:100%;padding:14px;background:#0b3c5d;color:white;border:none;border-radius:8px;font-size:18px;cursor:pointer;}
-table{width:100%;border-collapse:collapse;margin-top:20px;}
-th,td{border:1px solid #ccc;padding:10px;text-align:right;}
-th{background:#0b3c5d;color:white;}
-.result{margin-top:30px;background:#eef5ff;padding:20px;border-radius:10px;}
-.contact{margin-top:25px;background:#e8f5e9;padding:20px;border-radius:10px;text-align:center;}
-.whatsapp{display:inline-block;margin-top:12px;padding:12px 18px;background:#25D366;color:white;text-decoration:none;border-radius:8px;font-weight:bold;}
-.print-btn{background:#198754;margin-top:10px;}
-</style>
-</head>
-
-<body>
-
-<nav>
-<div class="nav-container">
-<strong>LegoTax</strong>
-<div>
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="tools.html">Tools</a>
-<a href="contact.html">Contact</a>
-</div>
-</div>
-</nav>
-
-<div class="container">
-
-<h2>Professional Income Tax Computation Suite</h2>
-
-<label>Select Regime</label>
-<select id="regime">
-<option value="old">Old Regime</option>
-<option value="middle">Middle Regime</option>
-<option value="new">New Regime</option>
-</select>
-
-<div class="grid">
-<div>
-<label>Salary Income</label><input id="salary" type="number">
-<label>Business / Professional Income</label><input id="business" type="number">
-<label>Other Income</label><input id="otherIncome" type="number">
-<label>House Property (+/-)</label><input id="house" type="number">
-<label>Total Deductions</label><input id="deductions" type="number">
-</div>
-
-<div>
-<label>TDS Credit</label><input id="tds" type="number">
-<label>Advance Tax Paid</label><input id="advance" type="number">
-<label>Months Delay (for 234A)</label><input id="delayA" type="number">
-<label>Months Delay Advance Tax (for 234B)</label><input id="delayB" type="number">
-<label>Underpaid Advance Tax (for 234C)</label><input id="under234C" type="number">
-</div>
-</div>
-
-<button onclick="calculate()">Generate Computation</button>
-<button class="print-btn" onclick="window.print()">Download / Print PDF</button>
-
-<div id="output" class="result"></div>
-
-<div class="contact">
-<b>Need ITR Filing / Tax Planning?</b><br>
-📞 8076054114<br>
-📧 support@legotax.in<br>
-<a class="whatsapp" href="https://wa.me/918076054114" target="_blank">Chat on WhatsApp</a>
-</div>
-
-</div>
-
 <script>
 
-function computeSlab(income, slabs, rates){
-let tax=0, prev=0;
+// ---------- SLABS ----------
+function getRegimeData(regime){
+
+if(regime==="old"){
+return {
+slabs:[250000,500000,1000000],
+rates:[0,0.05,0.20,0.30],
+rebate:500000
+};
+}
+
+if(regime==="middle"){
+return {
+slabs:[300000,700000,1000000,1200000,1500000],
+rates:[0,0.05,0.10,0.15,0.20,0.30],
+rebate:700000
+};
+}
+
+return {
+slabs:[400000,800000,1200000,1600000,2000000,2400000],
+rates:[0,0.05,0.10,0.15,0.20,0.25,0.30],
+rebate:1200000
+};
+}
+
+// ---------- SLAB TAX ----------
+function slabTax(income, slabs, rates){
+let tax=0;
+let prev=0;
+
 for(let i=0;i<slabs.length;i++){
 if(income>slabs[i]){
 tax+=(slabs[i]-prev)*rates[i];
@@ -96,26 +40,21 @@ tax+=(income-prev)*rates[i];
 return tax;
 }
 }
+
 tax+=(income-prev)*rates[rates.length-1];
 return tax;
 }
 
-function surchargeCalc(tax,income){
-if(income>5000000 && income<=10000000) return tax*0.10;
-if(income>10000000 && income<=20000000) return tax*0.15;
-if(income>20000000 && income<=50000000) return tax*0.25;
+// ---------- SURCHARGE ----------
+function surcharge(income,tax){
 if(income>50000000) return tax*0.37;
+if(income>20000000) return tax*0.25;
+if(income>10000000) return tax*0.15;
+if(income>5000000) return tax*0.10;
 return 0;
 }
 
-function getSlabs(regime){
-if(regime==="old")
-return {slabs:[250000,500000,1000000],rates:[0,0.05,0.20,0.30]};
-if(regime==="middle")
-return {slabs:[300000,700000,1000000,1200000,1500000],rates:[0,0.05,0.10,0.15,0.20,0.30]};
-return {slabs:[400000,800000,1200000,1600000,2000000,2400000],rates:[0,0.05,0.10,0.15,0.20,0.25,0.30]};
-}
-
+// ---------- MAIN CALCULATION ----------
 function calculate(){
 
 let regime=document.getElementById("regime").value;
@@ -132,43 +71,61 @@ let delayA=+document.getElementById("delayA").value||0;
 let delayB=+document.getElementById("delayB").value||0;
 let under234C=+document.getElementById("under234C").value||0;
 
+// Standard deduction auto
+if(salary>0) deductions+=50000;
+
+// Gross Income
 let gross=salary+business+otherIncome+house;
+
+// Taxable
 let taxable=Math.max(0,gross-deductions);
 
-let slabData=getSlabs(regime);
-let tax=computeSlab(taxable,slabData.slabs,slabData.rates);
-let surcharge=surchargeCalc(tax,taxable);
-let cess=(tax+surcharge)*0.04;
-let totalTax=tax+surcharge+cess;
+// Slab tax
+let data=getRegimeData(regime);
+let tax=slabTax(taxable,data.slabs,data.rates);
 
-let interest234A= totalTax * 0.01 * delayA;
-let interest234B= totalTax * 0.01 * delayB;
-let interest234C= under234C * 0.01 * 3;
+// 87A REBATE
+if(taxable<=data.rebate){
+tax=0;
+}
+
+// Surcharge
+let sur=surcharge(taxable,tax);
+
+// Cess
+let cess=(tax+sur)*0.04;
+
+let totalTax=tax+sur+cess;
+
+// Interest
+let interest234A= totalTax*0.01*delayA;
+let interest234B= totalTax*0.01*delayB;
+let interest234C= under234C*0.01*3;
 
 let grossLiability=totalTax+interest234A+interest234B+interest234C;
 
+// Net payable
 let netPayable=grossLiability-(tds+advance);
 
+// OUTPUT
 document.getElementById("output").innerHTML=`
 <table>
 <tr><th>Particulars</th><th>Amount (₹)</th></tr>
-<tr><td>Gross Income</td><td>${gross.toLocaleString()}</td></tr>
-<tr><td>Taxable Income</td><td>${taxable.toLocaleString()}</td></tr>
+<tr><td>Gross Total Income</td><td>${gross.toLocaleString()}</td></tr>
+<tr><td>Less: Deductions</td><td>${deductions.toLocaleString()}</td></tr>
+<tr><td><b>Total Income</b></td><td><b>${taxable.toLocaleString()}</b></td></tr>
 <tr><td>Income Tax</td><td>${Math.round(tax).toLocaleString()}</td></tr>
-<tr><td>Surcharge</td><td>${Math.round(surcharge).toLocaleString()}</td></tr>
-<tr><td>Cess (4%)</td><td>${Math.round(cess).toLocaleString()}</td></tr>
-<tr><td><b>Total Tax</b></td><td><b>${Math.round(totalTax).toLocaleString()}</b></td></tr>
-<tr><td>Interest 234A</td><td>${Math.round(interest234A).toLocaleString()}</td></tr>
-<tr><td>Interest 234B</td><td>${Math.round(interest234B).toLocaleString()}</td></tr>
-<tr><td>Interest 234C</td><td>${Math.round(interest234C).toLocaleString()}</td></tr>
+<tr><td>Surcharge</td><td>${Math.round(sur).toLocaleString()}</td></tr>
+<tr><td>Health & Education Cess 4%</td><td>${Math.round(cess).toLocaleString()}</td></tr>
+<tr><td><b>Total Tax Liability</b></td><td><b>${Math.round(totalTax).toLocaleString()}</b></td></tr>
+<tr><td>Interest u/s 234A</td><td>${Math.round(interest234A).toLocaleString()}</td></tr>
+<tr><td>Interest u/s 234B</td><td>${Math.round(interest234B).toLocaleString()}</td></tr>
+<tr><td>Interest u/s 234C</td><td>${Math.round(interest234C).toLocaleString()}</td></tr>
 <tr><td><b>Gross Liability</b></td><td><b>${Math.round(grossLiability).toLocaleString()}</b></td></tr>
-<tr><td>TDS + Advance Tax</td><td>${(tds+advance).toLocaleString()}</td></tr>
+<tr><td>Less: TDS + Advance Tax</td><td>${(tds+advance).toLocaleString()}</td></tr>
 <tr><th>Net Payable / (Refund)</th><th>${Math.round(netPayable).toLocaleString()}</th></tr>
 </table>
 `;
 }
 
 </script>
-
-</body>
-</html>
