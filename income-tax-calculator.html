@@ -9,35 +9,32 @@
 * { box-sizing: border-box; margin:0; padding:0; }
 body { font-family:'Poppins',sans-serif; background:#f4f6f9; color:#1f2933; }
 
-nav {
-  position:fixed; top:0; width:100%; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.08); z-index:1000;
-}
+nav { position:fixed; top:0; width:100%; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.08); z-index:1000; }
 .nav-container { max-width:1200px; margin:auto; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; }
-nav a { text-decoration:none; color:#0b3c5d; margin-left:20px; font-weight:500; }
+nav a { text-decoration:none; color:#0b3c5d; margin-left:15px; font-weight:500; }
 
-.container { max-width:950px; margin:140px auto 40px; background:#fff; padding:35px; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.08); }
+.container { max-width:900px; margin:120px auto 40px; background:#fff; padding:30px; border-radius:16px; box-shadow:0 15px 40px rgba(0,0,0,.08); }
 
-h2{text-align:center;color:#0b3c5d;margin-bottom:25px;}
-label{font-weight:600;margin-top:12px;display:block;}
-input{width:100%;padding:12px;border-radius:8px;border:1px solid #d0d7de;margin-top:6px;}
+h2{text-align:center;color:#0b3c5d;margin-bottom:20px;}
+label{font-weight:600;margin-top:10px;display:block;}
+input{width:100%;padding:10px;border-radius:6px;border:1px solid #d0d7de;margin-top:5px;}
 
 button{
-  margin-top:22px;width:100%;padding:15px;background:#0b3c5d;color:white;border:none;border-radius:10px;font-size:17px;cursor:pointer;
+  margin-top:18px;width:100%;padding:14px;background:#0b3c5d;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;
 }
 button:hover{background:#07283f;}
 
-.result-box{margin-top:30px;padding:25px;border-radius:14px;background:#f4f9ff;display:none;}
-.regime-box{background:#fff;padding:18px;border-radius:12px;margin-top:20px;box-shadow:0 6px 18px rgba(0,0,0,.05);}
-.regime-title{font-weight:700;color:#0b3c5d;margin-bottom:10px;font-size:18px;}
-.summary{background:#e8f5e9;padding:15px;border-radius:10px;margin-top:20px;font-weight:600;text-align:center;font-size:17px;}
-.print-btn{background:#198754;margin-top:15px;}
-.excel-btn{background:#ff9800;margin-top:10px;}
+.result-box{margin-top:25px;padding:20px;border-radius:12px;background:#f4f9ff;display:none;}
+.regime-box{background:#fff;padding:15px;border-radius:10px;margin-top:15px;box-shadow:0 4px 12px rgba(0,0,0,.05);}
+.regime-title{font-weight:700;color:#0b3c5d;margin-bottom:8px;font-size:16px;}
+.summary{background:#e8f5e9;padding:12px;border-radius:10px;margin-top:15px;font-weight:600;text-align:center;font-size:16px;}
+.print-btn{background:#198754;margin-top:12px;}
+.excel-btn{background:#ff9800;margin-top:8px;}
 
-table{width:100%;border-collapse:collapse;margin-top:12px;}
-th,td{border:1px solid #ddd;padding:9px;text-align:right;}
+table{width:100%;border-collapse:collapse;margin-top:8px;}
+th,td{border:1px solid #ddd;padding:7px;text-align:right;}
 th{background:#0b3c5d;color:white;}
-
-.client-box{background:#fff7e6;padding:15px;border-radius:12px;margin-bottom:20px;}
+.client-box{background:#fff7e6;padding:12px;border-radius:10px;margin-bottom:15px;}
 
 @media print{
   body *{visibility:hidden;}
@@ -46,9 +43,9 @@ th{background:#0b3c5d;color:white;}
 }
 </style>
 </head>
-
 <body>
 
+<!-- NAVIGATION -->
 <nav>
   <div class="nav-container">
     <strong>LegoTax</strong>
@@ -64,6 +61,7 @@ th{background:#0b3c5d;color:white;}
   </div>
 </nav>
 
+<!-- CONTAINER -->
 <div class="container">
 <h2>Income Tax Calculator & Statement of Income</h2>
 
@@ -78,7 +76,6 @@ th{background:#0b3c5d;color:white;}
 <label>House Property (+/-)</label><input id="house" type="number">
 <label>Other Income</label><input id="otherIncome" type="number">
 <label>Other Deductions (80C etc - Old/Middle Only)</label><input id="deductions" type="number">
-
 <label>TDS Received</label><input id="tds" type="number">
 <label>Advance Tax Paid</label><input id="advance" type="number">
 
@@ -89,112 +86,106 @@ th{background:#0b3c5d;color:white;}
 <h3 style="text-align:center;">STATEMENT OF INCOME</h3>
 <div id="clientDetails"></div>
 <p id="gross"></p>
-
 <div id="oldBox" class="regime-box"></div>
 <div id="midBox" class="regime-box"></div>
 <div id="newBox" class="regime-box"></div>
-
 <div id="bestRegime" class="summary"></div>
 </div>
+<button class="print-btn">Print / Download PDF</button>
+<button class="excel-btn">Export Excel</button>
+</div>
+</div>
 
-<button class="print-btn" onclick="window.print()">Print / Download PDF</button>
-<button class="excel-btn" onclick="downloadExcel()">Export Excel</button>
-</div>
-</div>
+<!-- GOOGLE ANALYTICS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-516644890"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-516644890');
+</script>
 
 <script>
+// SLAB CALCULATION
 function slab(income, slabs, rates){
-let tax=0,prev=0,work="";
-for(let i=0;i<slabs.length;i++){
-if(income>slabs[i]){
-let part=(slabs[i]-prev)*rates[i];
-tax+=part;
-work+=`₹${prev.toLocaleString()} - ₹${slabs[i].toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
-prev=slabs[i];
-}else{
-let part=(income-prev)*rates[i];
-tax+=part;
-work+=`₹${prev.toLocaleString()} - ₹${income.toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
-return [tax,work];
-}}
-let part=(income-prev)*rates[rates.length-1];
-tax+=part;
-work+=`Above ₹${prev.toLocaleString()} @${rates[rates.length-1]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
-return [tax,work];
+  let tax=0, prev=0, work="";
+  for(let i=0;i<slabs.length;i++){
+    if(income>slabs[i]){
+      let part=(slabs[i]-prev)*rates[i];
+      tax+=part;
+      work+=`₹${prev.toLocaleString()} - ₹${slabs[i].toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
+      prev=slabs[i];
+    } else {
+      let part=(income-prev)*rates[i];
+      tax+=part;
+      work+=`₹${prev.toLocaleString()} - ₹${income.toLocaleString()} @${rates[i]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
+      return [tax,work];
+    }
+  }
+  let part=(income-prev)*rates[rates.length-1];
+  tax+=part;
+  work+=`Above ₹${prev.toLocaleString()} @${rates[rates.length-1]*100}% = ₹${Math.round(part).toLocaleString()}<br>`;
+  return [tax,work];
 }
 
-// DETECT INCOME TYPE WITH AMOUNTS
+// GET INCOME TYPE
 function getIncomeType(salary, business, house, otherIncome){
-    let types = [];
-    if(salary>0) types.push("Salary: ₹"+salary.toLocaleString());
-    if(business>0) types.push("Business: ₹"+business.toLocaleString());
-    if(house!==0) types.push("House Property: ₹"+house.toLocaleString());
-    if(otherIncome>0) types.push("Other: ₹"+otherIncome.toLocaleString());
+  let types = [];
+  if(salary>0) types.push("Salary: ₹"+salary.toLocaleString());
+  if(business>0) types.push("Business: ₹"+business.toLocaleString());
+  if(house!==0) types.push("House Property: ₹"+house.toLocaleString());
+  if(otherIncome>0) types.push("Other: ₹"+otherIncome.toLocaleString());
 
-    if(types.length === 0) return "No Income Entered";
-    if(types.length === 1) return types[0];
-    return "Mixed Income (" + types.join(", ") + ")";
+  if(types.length===0) return "No Income Entered";
+  if(types.length===1) return types[0];
+  return "Mixed Income (" + types.join(", ") + ")";
 }
 
+// CALCULATE TAX
 function calculateTax(){
-let name = document.getElementById("name").value;
-let pan = document.getElementById("pan").value;
-let ay = document.getElementById("ay").value;
+  let name = document.getElementById("name").value;
+  let pan = document.getElementById("pan").value;
+  let ay = document.getElementById("ay").value;
 
-let clientDetails = document.getElementById("clientDetails");
-let oldBox = document.getElementById("oldBox");
-let midBox = document.getElementById("midBox");
-let newBox = document.getElementById("newBox");
-let bestRegime = document.getElementById("bestRegime");
-let resultBox = document.getElementById("resultBox");
+  let salary=+document.getElementById("salary").value||0;
+  let business=+document.getElementById("business").value||0;
+  let house=+document.getElementById("house").value||0;
+  let otherIncome=+document.getElementById("otherIncome").value||0;
+  let deductions=+document.getElementById("deductions").value||0;
+  let tds=+document.getElementById("tds").value||0;
+  let advance=+document.getElementById("advance").value||0;
+  let grossIncome=salary+business+house+otherIncome;
+  let incomeType = getIncomeType(salary,business,house,otherIncome);
 
-let salary=+document.getElementById("salary").value||0;
-let business=+document.getElementById("business").value||0;
-let house=+document.getElementById("house").value||0;
-let otherIncome=+document.getElementById("otherIncome").value||0;
-let deductions=+document.getElementById("deductions").value||0;
-let tds=+document.getElementById("tds").value||0;
-let advance=+document.getElementById("advance").value||0;
+  // TRACK IN GOOGLE ANALYTICS
+  gtag('event','calculate_tax',{'income_type':incomeType});
 
-let grossIncome=salary+business+house+otherIncome;
-
-// GET INCOME TYPE WITH AMOUNTS
-let incomeType = getIncomeType(salary, business, house, otherIncome);
-
-clientDetails.innerHTML=`<b>Name:</b> ${name}<br>
+  // SHOW RESULTS
+  document.getElementById("clientDetails").innerHTML=`<b>Name:</b> ${name}<br>
 <b>PAN:</b> ${pan}<br>
 <b>Assessment Year:</b> ${ay}<br>
 <b>Income Type:</b> ${incomeType}<hr>`;
+  document.getElementById("gross").innerHTML="<b>Gross Income:</b> ₹ "+grossIncome.toLocaleString();
 
-document.getElementById("gross").innerHTML="<b>Gross Income:</b> ₹ "+grossIncome.toLocaleString();
+  function regime(type){
+    let std=salary>0?(type==="Old"?50000:75000):0;
+    let allowedDed=(type==="New")?0:deductions;
+    let taxable=Math.max(0,grossIncome-(std+allowedDed));
+    let slabs,rates,rebate;
+    if(type==="Old"){ slabs=[250000,500000,1000000]; rates=[0,0.05,0.20,0.30]; rebate=500000;}
+    else if(type==="Middle"){ slabs=[300000,700000,1000000,1200000,1500000]; rates=[0,0.05,0.10,0.15,0.20,0.30]; rebate=700000;}
+    else{ slabs=[400000,800000,1200000,1600000,2000000,2400000]; rates=[0,0.05,0.10,0.15,0.20,0.25,0.30]; rebate=1200000;}
+    let [tax,work]=slab(taxable,slabs,rates);
+    if(taxable<=rebate) tax=0;
+    let cess=tax*0.04;
+    let total=Math.round(tax+cess);
+    let net=total-(tds+advance);
+    return {std,allowedDed,taxable,base:Math.round(tax),cess:Math.round(cess),total,net,work};
+  }
 
-function regime(type){
-let std=salary>0?(type==="Old"?50000:75000):0;
-let allowedDed=(type==="New")?0:deductions;
-let taxable=Math.max(0,grossIncome-(std+allowedDed));
-
-let slabs,rates,rebate;
-if(type==="Old"){ slabs=[250000,500000,1000000]; rates=[0,0.05,0.20,0.30]; rebate=500000;}
-else if(type==="Middle"){ slabs=[300000,700000,1000000,1200000,1500000]; rates=[0,0.05,0.10,0.15,0.20,0.30]; rebate=700000;}
-else{ slabs=[400000,800000,1200000,1600000,2000000,2400000]; rates=[0,0.05,0.10,0.15,0.20,0.25,0.30]; rebate=1200000;}
-
-let [tax,work]=slab(taxable,slabs,rates);
-if(taxable<=rebate) tax=0;
-
-let cess=tax*0.04;
-let total=Math.round(tax+cess);
-let net=total-(tds+advance);
-
-return {std,allowedDed,taxable,base:Math.round(tax),cess:Math.round(cess),total,net,work};
-}
-
-let oldR=regime("Old");
-let midR=regime("Middle");
-let newR=regime("New");
-
-function box(title,data){
-return `
-<div class="regime-title">${title} Regime</div>
+  let oldR=regime("Old"), midR=regime("Middle"), newR=regime("New");
+  function box(title,data){
+    return `<div class="regime-title">${title} Regime</div>
 <table>
 <tr><td>Standard Deduction</td><td>₹ ${data.std.toLocaleString()}</td></tr>
 <tr><td>Other Deductions</td><td>₹ ${data.allowedDed.toLocaleString()}</td></tr>
@@ -205,30 +196,46 @@ return `
 <tr><td>Less: TDS + Advance</td><td>₹ ${(tds+advance).toLocaleString()}</td></tr>
 <tr><td><b>Net Payable / Refund</b></td><td><b>₹ ${data.net.toLocaleString()}</b></td></tr>
 </table>
-<div style="margin-top:10px;font-size:14px"><b>Slab Working:</b><br>${data.work}</div>`;
+<div style="margin-top:8px;font-size:13px"><b>Slab Working:</b><br>${data.work}</div>`;
+  }
+
+  document.getElementById("oldBox").innerHTML=box("Old",oldR);
+  document.getElementById("midBox").innerHTML=box("Middle",midR);
+  document.getElementById("newBox").innerHTML=box("New",newR);
+
+  document.getElementById("bestRegime").innerHTML="Best Tax Saving Regime: "+(Math.min(oldR.total,midR.total,newR.total)===oldR.total?"OLD":Math.min(oldR.total,midR.total,newR.total)===midR.total?"MIDDLE":"NEW");
+
+  document.getElementById("resultBox").style.display="block";
 }
 
-oldBox.innerHTML=box("Old",oldR);
-midBox.innerHTML=box("Middle",midR);
-newBox.innerHTML=box("New",newR);
+// PRINT / EXCEL EVENTS
+document.querySelector('.print-btn').addEventListener('click',function(){
+  let salary=+document.getElementById("salary").value||0;
+  let business=+document.getElementById("business").value||0;
+  let house=+document.getElementById("house").value||0;
+  let otherIncome=+document.getElementById("otherIncome").value||0;
+  let incomeType = getIncomeType(salary,business,house,otherIncome);
+  gtag('event','print_pdf',{'income_type':incomeType});
+  window.print();
+});
 
-let min=Math.min(oldR.total,midR.total,newR.total);
-bestRegime.innerHTML="Best Tax Saving Regime: "+(min===oldR.total?"OLD":min===midR.total?"MIDDLE":"NEW");
-
-resultBox.style.display="block";
-}
-
-function downloadExcel(){
-let text=document.getElementById("printSection").innerText;
-let blob=new Blob([text],{type:"application/vnd.ms-excel"});
-let link=document.createElement("a");
-link.href=URL.createObjectURL(blob);
-link.download="Statement_of_Income.xls";
-link.click();
-}
+document.querySelector('.excel-btn').addEventListener('click',function(){
+  let salary=+document.getElementById("salary").value||0;
+  let business=+document.getElementById("business").value||0;
+  let house=+document.getElementById("house").value||0;
+  let otherIncome=+document.getElementById("otherIncome").value||0;
+  let incomeType = getIncomeType(salary,business,house,otherIncome);
+  gtag('event','export_excel',{'income_type':incomeType});
+  let text=document.getElementById("printSection").innerText;
+  let blob=new Blob([text],{type:"application/vnd.ms-excel"});
+  let link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);
+  link.download="Statement_of_Income.xls";
+  link.click();
+});
 </script>
 
-<footer style="margin-top:40px; text-align:center; padding:30px 20px; background:#111827; color:#9ca3af;">
+<footer style="margin-top:30px; text-align:center; padding:25px 20px; background:#111827; color:#9ca3af;">
 <p>© 2025 LegoTax.in</p>
 <p>Support: support@legotax.in | Phone: 8076054114</p>
 <p>Disclaimer: Content is for educational and informational purposes only.</p>
