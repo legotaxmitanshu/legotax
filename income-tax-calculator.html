@@ -1,19 +1,20 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Income Tax Calculator FY 2025-26 | LegoTax</title>
+<title>Professional Income Tax Computation | LegoTax</title>
 
 <style>
 body{
-  font-family: 'Poppins', sans-serif;
+  font-family:Poppins, sans-serif;
   background:#f4f6f8;
   margin:0;
   color:#222;
 }
 
-/* HEADER (same as your prepaid page) */
+/* NAVBAR */
 nav {
   position: fixed;
   top: 0;
@@ -38,9 +39,9 @@ nav a {
   font-weight: 600;
 }
 
-/* PAGE BOX */
+/* BOX */
 .container{
-  max-width:900px;
+  max-width:1000px;
   margin:120px auto 30px;
   background:#ffffff;
   padding:30px;
@@ -53,16 +54,21 @@ h2{
   color:#0b3c5d;
 }
 
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
 label{
-  font-weight:bold;
+  font-weight:600;
+  margin-top:10px;
   display:block;
-  margin-top:12px;
 }
 
 input{
   width:100%;
   padding:10px;
-  margin-top:5px;
   border-radius:6px;
   border:1px solid #ccc;
 }
@@ -79,48 +85,49 @@ button{
   cursor:pointer;
 }
 
-button:hover{
-  background:#082b45;
-}
-
 .result{
-  margin-top:25px;
-  padding:18px;
-  background:#e8f5e9;
-  border-radius:10px;
-  font-size:18px;
-  text-align:center;
+margin-top:30px;
+background:#eef5ff;
+padding:20px;
+border-radius:10px;
 }
 
-.better{
-  margin-top:15px;
-  padding:15px;
-  background:#fff3cd;
-  border-radius:8px;
-  font-weight:bold;
-  text-align:center;
-  font-size:18px;
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:10px;
+text-align:right;
+}
+th{
+background:#0b3c5d;
+color:white;
 }
 
 .contact{
-  margin-top:25px;
-  padding:18px;
-  background:#e3f2fd;
-  border-radius:10px;
-  text-align:center;
-  font-size:18px;
+margin-top:25px;
+background:#e8f5e9;
+padding:20px;
+border-radius:10px;
+text-align:center;
+font-size:18px;
 }
 .whatsapp{
-  display:inline-block;
-  margin-top:12px;
-  padding:12px 18px;
-  background:#25D366;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-  border-radius:8px;
+display:inline-block;
+margin-top:12px;
+padding:12px 18px;
+background:#25D366;
+color:white;
+text-decoration:none;
+font-weight:bold;
+border-radius:8px;
 }
 </style>
+
 </head>
 
 <body>
@@ -132,8 +139,8 @@ button:hover{
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
       <a href="acts-law.html">Acts & Rules</a>
-      <a href="articles.html">Articles / Blogs</a>
-      <a href="news.html">News & Updates</a>
+      <a href="articles.html">Articles</a>
+      <a href="news.html">News</a>
       <a href="tools.html">Tools</a>
       <a href="contact.html">Contact</a>
     </div>
@@ -142,42 +149,46 @@ button:hover{
 
 <div class="container">
 
-<h2>Income Tax Calculator FY 2025-26</h2>
+<h2>Professional Income Tax Computation (FY 2025-26)</h2>
 
-<label>Annual Income (₹)</label>
-<input type="number" id="income">
+<div class="grid">
 
-<label>HRA Exemption</label>
-<input type="number" id="hra">
+<div>
+<label>Salary Income</label>
+<input id="salary" type="number">
 
-<label>Standard Deduction (Salary ₹50,000)</label>
-<input type="number" id="standard" value="50000">
+<label>Business / Professional Income</label> <input id="business" type="number">
 
-<h3>Old Regime Deductions</h3>
+<label>Other Income (Interest etc)</label> <input id="otherIncome" type="number">
 
-<label>80C</label>
-<input type="number" id="d80c">
+<label>House Property Income (+/-)</label> <input id="house" type="number">
 
-<label>80D</label>
-<input type="number" id="d80d">
+</div>
 
-<label>Home Loan Interest (Sec 24)</label>
-<input type="number" id="home">
+<div>
+<h3>Deductions (Old Regime)</h3>
 
-<label>Education Loan Interest (80E)</label>
-<input type="number" id="edu">
+<label>80C</label> <input id="d80c" type="number">
 
-<label>Other deductions</label>
-<input type="number" id="other">
+<label>80D</label> <input id="d80d" type="number">
 
-<button onclick="calculateTax()">Calculate Tax</button>
+<label>Home Loan Interest (24)</label> <input id="home" type="number">
 
-<div class="result" id="result">Enter details and click calculate</div>
-<div class="better" id="better"></div>
+<label>80E Education Loan</label> <input id="edu" type="number">
+
+<label>Other Deduction</label> <input id="other" type="number">
+
+</div>
+
+</div>
+
+<button onclick="calculate()">Generate Computation</button>
+
+<div id="output" class="result"></div>
 
 <div class="contact">
-<b>Need help filing ITR?</b><br>
-LEGOTAX - GST | Income Tax | TDS | Notice Reply<br><br>
+<b>Need ITR Filing / Tax Planning?</b><br>
+LEGOTAX – GST | Income Tax | TDS | Notice Reply<br><br>
 📞 8076054114<br>
 📧 support@legotax.in<br><br>
 <a class="whatsapp" href="https://wa.me/918076054114" target="_blank">Chat on WhatsApp</a>
@@ -187,58 +198,87 @@ LEGOTAX - GST | Income Tax | TDS | Notice Reply<br><br>
 
 <script>
 
-function oldRegimeTax(taxable){
+function slabOld(t){
 let tax=0;
-if(taxable<=250000) tax=0;
-else if(taxable<=500000) tax=(taxable-250000)*0.05;
-else if(taxable<=1000000) tax=12500+(taxable-500000)*0.20;
-else tax=112500+(taxable-1000000)*0.30;
-if(taxable<=500000) tax=0;
+if(t>250000) tax+=(Math.min(t,500000)-250000)*0.05;
+if(t>500000) tax+=(Math.min(t,1000000)-500000)*0.20;
+if(t>1000000) tax+=(t-1000000)*0.30;
+if(t<=500000) tax=0;
 return tax;
 }
 
-function newRegimeTax(income){
+function slabNew(t){
 let tax=0;
-if(income<=400000) tax=0;
-else if(income<=800000) tax=(income-400000)*0.05;
-else if(income<=1200000) tax=20000+(income-800000)*0.10;
-else if(income<=1600000) tax=60000+(income-1200000)*0.15;
-else if(income<=2000000) tax=120000+(income-1600000)*0.20;
-else if(income<=2400000) tax=200000+(income-2000000)*0.25;
-else tax=300000+(income-2400000)*0.30;
+let slabs=[400000,800000,1200000,1600000,2000000,2400000];
+let rates=[0,0.05,0.10,0.15,0.20,0.25,0.30];
 
-if(income<=1200000) tax=0;
+let prev=0;
+for(let i=0;i<slabs.length;i++){
+if(t>slabs[i]){
+tax+=(slabs[i]-prev)*rates[i];
+prev=slabs[i];
+}else{
+tax+=(t-prev)*rates[i];
+return (t<=1200000)?0:tax;
+}
+}
+tax+=(t-prev)*0.30;
 return tax;
 }
 
-function calculateTax(){
+function surcharge(tax,income){
+let s=0;
+if(income>5000000 && income<=10000000) s=tax*0.10;
+else if(income>10000000 && income<=20000000) s=tax*0.15;
+else if(income>20000000 && income<=50000000) s=tax*0.25;
+else if(income>50000000) s=tax*0.37;
+return s;
+}
 
-let income=Number(document.getElementById("income").value)||0;
-let hra=Number(document.getElementById("hra").value)||0;
-let standard=Number(document.getElementById("standard").value)||0;
+function calculate(){
+
+let salary=Number(document.getElementById("salary").value)||0;
+let business=Number(document.getElementById("business").value)||0;
+let otherIncome=Number(document.getElementById("otherIncome").value)||0;
+let house=Number(document.getElementById("house").value)||0;
+
+let gross=salary+business+otherIncome+house;
+
 let d80c=Number(document.getElementById("d80c").value)||0;
 let d80d=Number(document.getElementById("d80d").value)||0;
 let home=Number(document.getElementById("home").value)||0;
 let edu=Number(document.getElementById("edu").value)||0;
 let other=Number(document.getElementById("other").value)||0;
 
-let totalDeduction=hra+standard+d80c+d80d+home+edu+other;
-let oldTaxable=Math.max(0,income-totalDeduction);
-let oldTax=oldRegimeTax(oldTaxable);
+let deductions=d80c+d80d+home+edu+other;
 
-let newTaxable=Math.max(0,income-standard);
-let newTax=newRegimeTax(newTaxable);
+let taxableOld=Math.max(0,gross-deductions-50000);
+let taxOld=slabOld(taxableOld);
+let surchargeOld=surcharge(taxOld,taxableOld);
+let cessOld=(taxOld+surchargeOld)*0.04;
+let totalOld=taxOld+surchargeOld+cessOld;
 
-document.getElementById("result").innerHTML=
-"Old Regime Tax: ₹"+oldTax.toLocaleString()+"<br>New Regime Tax: ₹"+newTax.toLocaleString();
+let taxableNew=Math.max(0,gross-50000);
+let taxNew=slabNew(taxableNew);
+let surchargeNew=surcharge(taxNew,taxableNew);
+let cessNew=(taxNew+surchargeNew)*0.04;
+let totalNew=taxNew+surchargeNew+cessNew;
 
-document.getElementById("better").innerHTML=
-(oldTax<newTax) ? "Old Regime saves ₹"+(newTax-oldTax).toLocaleString()
-: (newTax<oldTax) ? "New Regime saves ₹"+(oldTax-newTax).toLocaleString()
-: "Both same tax";
+document.getElementById("output").innerHTML=`
+<h3>Computation Summary</h3>
+
+<table>
+<tr><th>Particulars</th><th>Old Regime</th><th>New Regime</th></tr>
+<tr><td>Gross Income</td><td>${gross.toLocaleString()}</td><td>${gross.toLocaleString()}</td></tr>
+<tr><td>Taxable Income</td><td>${taxableOld.toLocaleString()}</td><td>${taxableNew.toLocaleString()}</td></tr>
+<tr><td>Income Tax</td><td>${Math.round(taxOld).toLocaleString()}</td><td>${Math.round(taxNew).toLocaleString()}</td></tr>
+<tr><td>Surcharge</td><td>${Math.round(surchargeOld).toLocaleString()}</td><td>${Math.round(surchargeNew).toLocaleString()}</td></tr>
+<tr><td>Health & Education Cess (4%)</td><td>${Math.round(cessOld).toLocaleString()}</td><td>${Math.round(cessNew).toLocaleString()}</td></tr>
+<tr><th>Total Tax Payable</th><th>${Math.round(totalOld).toLocaleString()}</th><th>${Math.round(totalNew).toLocaleString()}</th></tr>
+</table>
+`;
 
 }
-
 </script>
 
 </body>
