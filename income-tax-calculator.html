@@ -14,6 +14,7 @@ body{
     margin:0;
     color:#222;
 }
+/* NAVIGATION HEADER */
 nav{
     position:fixed;
     top:0;
@@ -31,6 +32,21 @@ nav{
     justify-content:space-between;
     align-items:center;
 }
+nav .logo{
+    font-weight:700;
+    color:#0b3c5d;
+    font-size:20px;
+}
+nav .menu a{
+    margin-left:20px;
+    text-decoration:none;
+    color:#0b3c5d;
+    font-weight:600;
+}
+nav .menu a:hover{
+    color:#198754;
+}
+
 .container{
     max-width:950px;
     margin:150px auto 40px;
@@ -117,6 +133,22 @@ th{background:#0b3c5d;color:white;}
 </head>
 
 <body>
+<!-- TOP NAVIGATION -->
+<nav>
+  <div class="nav-container">
+    <div class="logo">LegoTax</div>
+    <div class="menu">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Acts & Rules</a>
+      <a href="#">Articles / Blogs</a>
+      <a href="#">News & Updates</a>
+      <a href="#">Tools</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
 <h2>Income Tax Calculator & Statement of Income</h2>
 
@@ -182,7 +214,6 @@ function slab(income, slabs, rates){
 }
 
 function calculateTax(){
-    // DOM elements
     let name = document.getElementById("name").value;
     let pan = document.getElementById("pan").value;
     let ay = document.getElementById("ay").value;
@@ -196,7 +227,6 @@ function calculateTax(){
 
     clientDetails.innerHTML=`<b>Name:</b> ${name}<br><b>PAN:</b> ${pan}<br><b>Assessment Year:</b> ${ay}<hr>`;
 
-    // Inputs
     let salary=+document.getElementById("salary").value||0;
     let business=+document.getElementById("business").value||0;
     let house=+document.getElementById("house").value||0;
