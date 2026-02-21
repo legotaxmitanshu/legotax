@@ -87,11 +87,27 @@ text-align:center;
 
 .contact{
 margin-top:25px;
-padding:18px;
+padding:20px;
 background:#e3f2fd;
 border-radius:10px;
 text-align:center;
 font-size:18px;
+}
+
+.whatsapp{
+display:inline-block;
+margin-top:12px;
+padding:12px 18px;
+background:#25D366;
+color:white;
+text-decoration:none;
+font-weight:bold;
+border-radius:8px;
+font-size:18px;
+}
+
+.whatsapp:hover{
+background:#1ebe5d;
 }
 </style>
 
@@ -134,7 +150,14 @@ Enter details and press Calculate
 <div class="contact">
 <b>Need help filing ITR?</b><br>
 LEGOTAX - GST | Income Tax | TDS | Notice Reply<br><br>
-📞 WhatsApp: 9XXXXXXXXX
+
+📞 Call: 8076054114<br>
+📧 Email: [support@legotax.in](mailto:support@legotax.in)<br><br>
+
+<a class="whatsapp" href="https://wa.me/918076054114" target="_blank">
+Chat on WhatsApp
+</a>
+
 </div>
 
 </div>
@@ -150,12 +173,12 @@ else if(taxable<=500000) tax=(taxable-250000)*0.05;
 else if(taxable<=1000000) tax=12500+(taxable-500000)*0.20;
 else tax=112500+(taxable-1000000)*0.30;
 
-if(taxable<=500000) tax=0; // rebate 87A
+if(taxable<=500000) tax=0;
 
 return tax;
 }
 
-// NEW REGIME (FY 2025-26 UPDATED)
+// NEW REGIME FY 2025-26
 function newRegimeTax(income){
 let tax=0;
 
@@ -167,7 +190,7 @@ else if(income<=2000000) tax=120000+(income-1600000)*0.20;
 else if(income<=2400000) tax=200000+(income-2000000)*0.25;
 else tax=300000+(income-2400000)*0.30;
 
-// 87A rebate → zero tax upto 12 lakh
+// 87A rebate upto 12 lakh
 if(income<=1200000) tax=0;
 
 return tax;
@@ -185,20 +208,17 @@ let home=Number(document.getElementById("home").value)||0;
 let edu=Number(document.getElementById("edu").value)||0;
 let other=Number(document.getElementById("other").value)||0;
 
-// OLD REGIME TAXABLE
 let totalDeduction=hra+standard+d80c+d80d+home+edu+other;
 let oldTaxable=income-totalDeduction;
 if(oldTaxable<0) oldTaxable=0;
 
 let oldTax=oldRegimeTax(oldTaxable);
 
-// NEW REGIME TAXABLE
 let newTaxable=income-standard;
 if(newTaxable<0) newTaxable=0;
 
 let newTax=newRegimeTax(newTaxable);
 
-// DISPLAY
 document.getElementById("result").innerHTML=
 "<b>Old Regime Tax:</b> ₹"+oldTax.toLocaleString()+
 "<br><b>New Regime Tax:</b> ₹"+newTax.toLocaleString();
