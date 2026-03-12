@@ -1,179 +1,239 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Tools – LegoTax</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Online GST, Income Tax and financial calculators built by LegoTax.">
+<title>Online Tools – LegoTax</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Online GST, Income Tax and financial calculators built by LegoTax.">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; color: #1f2933; background:#f4f6f9; }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      z-index: 1000;
-    }
-    .nav-container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav a {
-      text-decoration: none;
-      color: #0b3c5d;
-      margin-left: 20px;
-      font-weight: 500;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-    header {
-      padding: 140px 20px 60px;
-      background: #eef2f6;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 36px;
-      color: #0b3c5d;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 18px;
-      max-width: 900px;
-      margin: auto;
-      color: #555;
-    }
+body{
+font-family:'Poppins',sans-serif;
+color:#1f2933;
+background:#f4f6f9;
+}
 
-    section {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-    .tool-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
-    }
-    .tool-card {
-      background: #ffffff;
-      padding: 26px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.08);
-      text-align: center;
-      transition: 0.3s;
-    }
-    .tool-card:hover{
-      transform: translateY(-5px);
-    }
-    .tool-card h3 {
-      margin-bottom: 10px;
-      color: #0b3c5d;
-    }
-    .tool-card p {
-      margin-bottom: 18px;
-      color: #444;
-    }
-    .tool-card a {
-      display: inline-block;
-      padding: 12px 22px;
-      background: #0b3c5d;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-    }
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:#ffffff;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+z-index:1000;
+}
 
-    footer {
-      background: #111827;
-      color: #9ca3af;
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 60px;
-    }
-  </style>
+.nav-container{
+max-width:1200px;
+margin:auto;
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+nav a{
+text-decoration:none;
+color:#0b3c5d;
+margin-left:20px;
+font-weight:500;
+}
+
+header{
+padding:140px 20px 60px;
+background:#eef2f6;
+text-align:center;
+}
+
+header h1{
+font-size:36px;
+color:#0b3c5d;
+margin-bottom:10px;
+}
+
+header p{
+font-size:18px;
+max-width:900px;
+margin:auto;
+color:#555;
+}
+
+section{
+max-width:1100px;
+margin:60px auto;
+padding:0 20px;
+}
+
+.tool-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:22px;
+}
+
+.tool-card{
+background:#ffffff;
+padding:26px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+text-align:center;
+transition:0.3s;
+}
+
+.tool-card:hover{
+transform:translateY(-5px);
+}
+
+.tool-card h3{
+margin-bottom:10px;
+color:#0b3c5d;
+}
+
+.tool-card p{
+margin-bottom:18px;
+color:#444;
+}
+
+.tool-card a{
+display:inline-block;
+padding:12px 22px;
+background:#0b3c5d;
+color:#fff;
+text-decoration:none;
+border-radius:6px;
+font-weight:600;
+}
+
+footer{
+background:#111827;
+color:#9ca3af;
+text-align:center;
+padding:30px 20px;
+margin-top:60px;
+}
+</style>
+
 </head>
 
 <body>
 
 <nav>
-  <div class="nav-container">
-    <strong>LegoTax</strong>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="acts-law.html">Acts & Rules</a>
-      <a href="articles.html">Articles / Blogs</a>
-      <a href="news.html">News & Updates</a>
-      <a href="tools.html">Tools</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
+<div class="nav-container">
+<strong>LegoTax</strong>
+<div>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="acts-law.html">Acts & Rules</a>
+<a href="articles.html">Articles / Blogs</a>
+<a href="news.html">News & Updates</a>
+<a href="tools.html">Tools</a>
+<a href="contact.html">Contact</a>
+</div>
+</div>
 </nav>
 
 <header>
-  <h1>Online Tools</h1>
-  <p>
-    Smart and practical tools designed to simplify taxation, accounting and compliance work.
-  </p>
+<h1>Online Tools</h1>
+<p>
+Smart and practical tools designed to simplify taxation, accounting and compliance work.
+</p>
 </header>
 
 <section>
-  <div class="tool-grid">
 
-    <!-- PREPAID CALCULATOR (UNCHANGED) -->
-    <div class="tool-card">
-      <h3>Prepaid Insurance Calculator</h3>
-      <p>
-        Calculate prepaid insurance expenses and carry forward balances across financial years.
-      </p>
-      <a href="calculator.html">Open Calculator</a>
-    </div>
+<div class="tool-grid">
 
-    <!-- UPDATED INCOME TAX TOOL -->
-    <div class="tool-card">
-      <h3>Professional Income Tax Computation</h3>
-      <p>
-        Advanced ITR calculator for Salary, Business & Professional income.
-        Supports Old Regime, New Regime, surcharge, cess, interest u/s 234A/B/C,
-        TDS adjustment and refund calculation.
-      </p>
-      <a href="income-tax-calculator.html">Open Tool</a>
-    </div>
+<div class="tool-card">
+<h3>Prepaid Insurance Calculator</h3>
+<p>
+Calculate prepaid insurance expenses and carry forward balances across financial years.
+</p>
+<a href="calculator.html">Open Calculator</a>
+</div>
 
-    <!-- GST TOOL PLACEHOLDER -->
-    <div class="tool-card">
-      <h3>GST Late Fee & Interest Calculator</h3>
-      <p>
-        Calculate GST late fees and interest on delayed return filing and payment.
-      </p>
-      <a href="#">Coming Soon</a>
-    </div>
+<div class="tool-card">
+<h3>Professional Income Tax Computation</h3>
+<p>
+Advanced ITR calculator for Salary, Business & Professional income.
+Supports Old Regime, New Regime, surcharge, cess, interest u/s 234A/B/C,
+TDS adjustment and refund calculation.
+</p>
+<a href="income-tax-calculator.html">Open Tool</a>
+</div>
 
-  </div>
+<div class="tool-card">
+<h3>GST Late Fee & Interest Calculator</h3>
+<p>
+Calculate GST late fees and interest on delayed return filing and payment.
+</p>
+<a href="#">Coming Soon</a>
+</div>
+
+<!-- NEW TOOL -->
+
+<div class="tool-card">
+<h3>Capital Gain Calculator (Property)</h3>
+<p>
+Calculate capital gain or capital loss on property sale using purchase price,
+improvement cost and sale value.
+</p>
+<a href="capital-gain-calculator.html">Open Tool</a>
+</div>
+
+<div class="tool-card">
+<h3>GST Calculator</h3>
+<p>
+Quickly calculate GST amount and total value using standard GST rates.
+</p>
+<a href="gst-calculator.html">Open Tool</a>
+</div>
+
+<div class="tool-card">
+<h3>HRA Exemption Calculator</h3>
+<p>
+Calculate HRA exemption based on salary, rent paid and HRA received.
+</p>
+<a href="hra-calculator.html">Open Tool</a>
+</div>
+
+<div class="tool-card">
+<h3>Loan EMI Calculator</h3>
+<p>
+Calculate monthly EMI for home loans, personal loans and business loans.
+</p>
+<a href="emi-calculator.html">Open Tool</a>
+</div>
+
+<div class="tool-card">
+<h3>Age Calculator</h3>
+<p>
+Calculate exact age in years, months and days from date of birth.
+</p>
+<a href="age-calculator.html">Open Tool</a>
+</div>
+
+</div>
+
 </section>
 
 <footer>
-  <p>© 2025 LegoTax.in</p>
-  <p>Support: support@legotax.in | Phone: 8076054114</p>
-  <p>Disclaimer: Content is for educational and informational purposes only.</p>
+<p>© 2025 LegoTax.in</p>
+<p>Support: support@legotax.in | Phone: 8076054114</p>
+<p>Disclaimer: Content is for educational and informational purposes only.</p>
 </footer>
 
 <script>
-  window.__ow = window.__ow || {};
-  window.__ow.organizationId = "464cb5c2-8365-4bad-be15-3682987750b5";
-  window.__ow.template_id = "b39785b4-f596-432e-8021-c54169945c34";
-  window.__ow.integration_name = "manual_settings";
-  window.__ow.product_name = "chatbot";   
-  ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
+window.__ow = window.__ow || {};
+window.__ow.organizationId = "464cb5c2-8365-4bad-be15-3682987750b5";
+window.__ow.template_id = "b39785b4-f596-432e-8021-c54169945c34";
+window.__ow.integration_name = "manual_settings";
+window.__ow.product_name = "chatbot";
+;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
 </script>
 
 </body>
