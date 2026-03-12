@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -81,30 +81,11 @@ border-radius:6px;
 
 <label>Sale Price (₹)</label> <input type="number" id="sale">
 
-<label>Purchase Year</label>
-
-<select id="purchaseYear" onchange="showPurchaseIndex()">
-<option value="">Select Year</option>
-<option value="2001">2001-02</option>
-<option value="2005">2005-06</option>
-<option value="2010">2010-11</option>
-<option value="2015">2015-16</option>
-<option value="2018">2018-19</option>
-<option value="2020">2020-21</option>
-<option value="2022">2022-23</option>
-<option value="2023">2023-24</option>
-</select>
+<label>Purchase Year</label> <select id="purchaseYear"></select>
 
 <div id="purchaseCII"></div>
 
-<label>Sale Year</label>
-
-<select id="saleYear" onchange="showSaleIndex()">
-<option value="">Select Year</option>
-<option value="2022">2022-23</option>
-<option value="2023">2023-24</option>
-<option value="2024">2024-25</option>
-</select>
+<label>Sale Year</label> <select id="saleYear"></select>
 
 <div id="saleCII"></div>
 
@@ -116,39 +97,68 @@ border-radius:6px;
 
 <script>
 
-let CII={
+let CII = {
 2001:100,
+2002:105,
+2003:109,
+2004:113,
 2005:117,
+2006:122,
+2007:129,
+2008:137,
+2009:148,
 2010:167,
+2011:184,
+2012:200,
+2013:220,
+2014:240,
 2015:254,
+2016:264,
+2017:272,
 2018:280,
+2019:289,
 2020:301,
+2021:317,
 2022:331,
 2023:348,
-2024:363
+2024:363,
+2025:376
 };
 
-function showPurchaseIndex(){
+let purchaseSelect=document.getElementById("purchaseYear");
+let saleSelect=document.getElementById("saleYear");
 
-let year=document.getElementById("purchaseYear").value;
+for(let year in CII){
 
-if(year){
+let option1=document.createElement("option");
+option1.value=year;
+option1.text=year+"-"+(parseInt(year)+1);
+purchaseSelect.appendChild(option1);
+
+let option2=document.createElement("option");
+option2.value=year;
+option2.text=year+"-"+(parseInt(year)+1);
+saleSelect.appendChild(option2);
+
+}
+
+purchaseSelect.onchange=function(){
+
+let year=this.value;
+
 document.getElementById("purchaseCII").innerHTML=
 "Purchase Year CII: <b>"+CII[year]+"</b>";
-}
 
-}
+};
 
-function showSaleIndex(){
+saleSelect.onchange=function(){
 
-let year=document.getElementById("saleYear").value;
+let year=this.value;
 
-if(year){
 document.getElementById("saleCII").innerHTML=
 "Sale Year CII: <b>"+CII[year]+"</b>";
-}
 
-}
+};
 
 function calculate(){
 
@@ -159,6 +169,11 @@ let sale=parseFloat(document.getElementById("sale").value)||0;
 let purchaseYear=document.getElementById("purchaseYear").value;
 
 let saleYear=document.getElementById("saleYear").value;
+
+if(saleYear<=purchaseYear){
+alert("Sale year must be greater than purchase year");
+return;
+}
 
 let purchaseCII=CII[purchaseYear];
 
@@ -174,7 +189,7 @@ document.getElementById("result").innerHTML=
 
 "<b>Purchase Price:</b> ₹"+purchase.toFixed(2)+"<br><br>"+
 
-"<b>Indexed Cost:</b> ₹"+indexedCost.toFixed(2)+"<br><br>"+
+"<b>Indexed Cost of Acquisition:</b> ₹"+indexedCost.toFixed(2)+"<br><br>"+
 
 "<b>Sale Price:</b> ₹"+sale.toFixed(2)+"<br><br>"+
 
