@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Capital Gain Calculator with Indexation | Legotax</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+padding:40px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+text-align:center;
+color:#0b3c5d;
+}
+
+label{
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:6px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#0b3c5d;
+color:white;
+border:none;
+cursor:pointer;
+font-size:16px;
+border-radius:4px;
+}
+
+button:hover{
+background:#174e73;
+}
+
+.result{
+margin-top:20px;
+font-size:18px;
+background:#f2f6ff;
+padding:15px;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Capital Gain Calculator (With Indexation)</h2>
+
+<label>Purchase Price (₹)</label> <input type="number" id="purchase">
+
+<label>Sale Price (₹)</label> <input type="number" id="sale">
+
+<label>Purchase Year</label>
+
+<select id="purchaseYear" onchange="showPurchaseIndex()">
+<option value="">Select Year</option>
+<option value="2001">2001-02</option>
+<option value="2005">2005-06</option>
+<option value="2010">2010-11</option>
+<option value="2015">2015-16</option>
+<option value="2018">2018-19</option>
+<option value="2020">2020-21</option>
+<option value="2022">2022-23</option>
+<option value="2023">2023-24</option>
+</select>
+
+<div id="purchaseCII"></div>
+
+<label>Sale Year</label>
+
+<select id="saleYear" onchange="showSaleIndex()">
+<option value="">Select Year</option>
+<option value="2022">2022-23</option>
+<option value="2023">2023-24</option>
+<option value="2024">2024-25</option>
+</select>
+
+<div id="saleCII"></div>
+
+<button onclick="calculate()">Calculate Capital Gain</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+let CII={
+2001:100,
+2005:117,
+2010:167,
+2015:254,
+2018:280,
+2020:301,
+2022:331,
+2023:348,
+2024:363
+};
+
+function showPurchaseIndex(){
+
+let year=document.getElementById("purchaseYear").value;
+
+if(year){
+document.getElementById("purchaseCII").innerHTML=
+"Purchase Year CII: <b>"+CII[year]+"</b>";
+}
+
+}
+
+function showSaleIndex(){
+
+let year=document.getElementById("saleYear").value;
+
+if(year){
+document.getElementById("saleCII").innerHTML=
+"Sale Year CII: <b>"+CII[year]+"</b>";
+}
+
+}
+
+function calculate(){
+
+let purchase=parseFloat(document.getElementById("purchase").value)||0;
+
+let sale=parseFloat(document.getElementById("sale").value)||0;
+
+let purchaseYear=document.getElementById("purchaseYear").value;
+
+let saleYear=document.getElementById("saleYear").value;
+
+let purchaseCII=CII[purchaseYear];
+
+let saleCII=CII[saleYear];
+
+let indexedCost=purchase*(saleCII/purchaseCII);
+
+let gain=sale-indexedCost;
+
+let tax=gain*0.20;
+
+document.getElementById("result").innerHTML=
+
+"<b>Purchase Price:</b> ₹"+purchase.toFixed(2)+"<br><br>"+
+
+"<b>Indexed Cost:</b> ₹"+indexedCost.toFixed(2)+"<br><br>"+
+
+"<b>Sale Price:</b> ₹"+sale.toFixed(2)+"<br><br>"+
+
+"<b>Long Term Capital Gain:</b> ₹"+gain.toFixed(2)+"<br><br>"+
+
+"<b>Estimated LTCG Tax (20%):</b> ₹"+tax.toFixed(2);
+
+}
+
+</script>
+
+</body>
+</html>
