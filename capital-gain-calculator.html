@@ -1,38 +1,78 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Capital Gain Calculator with Indexation | Legotax</title>
+<title>Capital Gain Calculator with Indexation | LegoTax</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
+*{box-sizing:border-box;margin:0;padding:0}
+
 body{
-font-family:Arial;
+font-family:'Poppins',sans-serif;
+color:#1f2933;
 background:#f4f6f9;
-margin:0;
-padding:40px;
 }
 
-.container{
-max-width:700px;
+/* NAVBAR (Same as Tools Page) */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:#ffffff;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+z-index:1000;
+}
+
+.nav-container{
+max-width:1200px;
 margin:auto;
-background:white;
-padding:30px;
-border-radius:8px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-h2{
+nav a{
+text-decoration:none;
+color:#0b3c5d;
+margin-left:20px;
+font-weight:500;
+}
+
+/* PAGE HEADER */
+
+header{
+padding:140px 20px 40px;
+background:#eef2f6;
 text-align:center;
+}
+
+header h1{
+font-size:34px;
 color:#0b3c5d;
 }
 
+/* TOOL CONTAINER */
+
+.container{
+max-width:700px;
+margin:40px auto;
+background:#ffffff;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
 label{
-font-weight:bold;
+font-weight:500;
 }
 
 input,select{
@@ -41,7 +81,7 @@ padding:10px;
 margin-top:6px;
 margin-bottom:15px;
 border:1px solid #ccc;
-border-radius:4px;
+border-radius:6px;
 }
 
 button{
@@ -52,7 +92,8 @@ color:white;
 border:none;
 cursor:pointer;
 font-size:16px;
-border-radius:4px;
+border-radius:6px;
+font-weight:600;
 }
 
 button:hover{
@@ -61,10 +102,20 @@ background:#174e73;
 
 .result{
 margin-top:20px;
-font-size:18px;
-background:#f2f6ff;
-padding:15px;
+background:#f4f6f9;
+padding:20px;
 border-radius:6px;
+font-size:16px;
+}
+
+/* FOOTER */
+
+footer{
+background:#111827;
+color:#9ca3af;
+text-align:center;
+padding:30px 20px;
+margin-top:60px;
 }
 
 </style>
@@ -73,9 +124,34 @@ border-radius:6px;
 
 <body>
 
-<div class="container">
+<!-- NAVBAR -->
 
-<h2>Capital Gain Calculator (With Indexation)</h2>
+<nav>
+<div class="nav-container">
+<strong>LegoTax</strong>
+
+<div>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="acts-law.html">Acts & Rules</a>
+<a href="articles.html">Articles / Blogs</a>
+<a href="news.html">News & Updates</a>
+<a href="tools.html">Tools</a>
+<a href="contact.html">Contact</a>
+</div>
+
+</div>
+</nav>
+
+<!-- HEADER -->
+
+<header>
+<h1>Capital Gain Calculator (Property)</h1>
+</header>
+
+<!-- TOOL -->
+
+<div class="container">
 
 <label>Purchase Price (₹)</label> <input type="number" id="purchase">
 
@@ -95,9 +171,17 @@ border-radius:6px;
 
 </div>
 
+<!-- FOOTER -->
+
+<footer>
+<p>© 2025 LegoTax.in</p>
+<p>Support: support@legotax.in | Phone: 8076054114</p>
+<p>Disclaimer: Content is for educational and informational purposes only.</p>
+</footer>
+
 <script>
 
-let CII = {
+let CII={
 2001:100,
 2002:105,
 2003:109,
@@ -163,11 +247,9 @@ document.getElementById("saleCII").innerHTML=
 function calculate(){
 
 let purchase=parseFloat(document.getElementById("purchase").value)||0;
-
 let sale=parseFloat(document.getElementById("sale").value)||0;
 
 let purchaseYear=document.getElementById("purchaseYear").value;
-
 let saleYear=document.getElementById("saleYear").value;
 
 if(saleYear<=purchaseYear){
@@ -176,20 +258,17 @@ return;
 }
 
 let purchaseCII=CII[purchaseYear];
-
 let saleCII=CII[saleYear];
 
 let indexedCost=purchase*(saleCII/purchaseCII);
-
 let gain=sale-indexedCost;
-
 let tax=gain*0.20;
 
 document.getElementById("result").innerHTML=
 
 "<b>Purchase Price:</b> ₹"+purchase.toFixed(2)+"<br><br>"+
 
-"<b>Indexed Cost of Acquisition:</b> ₹"+indexedCost.toFixed(2)+"<br><br>"+
+"<b>Indexed Cost:</b> ₹"+indexedCost.toFixed(2)+"<br><br>"+
 
 "<b>Sale Price:</b> ₹"+sale.toFixed(2)+"<br><br>"+
 
