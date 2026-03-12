@@ -7,92 +7,109 @@
 <title>GST Invoice Generator | Legotax</title>
 
 <link rel="stylesheet" href="style.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
+
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background:#f2f5fa;
-    margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f2f5fa;
+margin:0;
 }
 
-/* ===== NAVBAR ===== */
+/* NAVBAR */
+
 .navbar{
-    background:#1a237e;
-    padding:12px;
-    text-align:center;
+background:#1a237e;
+padding:12px;
+text-align:center;
 }
+
 .navbar a{
-    color:white;
-    margin:10px;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:15px;
+color:white;
+margin:10px;
+text-decoration:none;
+font-weight:bold;
+font-size:15px;
 }
+
 .navbar a:hover{
-    text-decoration:underline;
+text-decoration:underline;
 }
 
-/* ===== MAIN ===== */
+/* MAIN */
+
 .container{
-    background:white;
-    max-width:1000px;
-    margin:30px auto;
-    padding:25px;
-    border-radius:8px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+background:white;
+max-width:1000px;
+margin:30px auto;
+padding:25px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-h2{ text-align:center; color:#1a237e; }
+h2{
+text-align:center;
+color:#1a237e;
+}
 
 input{
-    width:100%;
-    padding:8px;
-    margin:6px 0;
-    border:1px solid #ccc;
-    border-radius:4px;
+width:100%;
+padding:8px;
+margin:6px 0;
+border:1px solid #ccc;
+border-radius:4px;
 }
 
 button{
-    padding:10px;
-    background:#1a237e;
-    color:white;
-    border:none;
-    margin-top:10px;
-    cursor:pointer;
-    border-radius:4px;
+padding:10px;
+background:#1a237e;
+color:white;
+border:none;
+margin-top:10px;
+cursor:pointer;
+border-radius:4px;
 }
-button:hover{ background:#3949ab; }
+
+button:hover{
+background:#3949ab;
+}
 
 table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
 }
+
 th,td{
-    border:1px solid #ddd;
-    padding:8px;
-    text-align:center;
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
 }
-th{ background:#1a237e; color:white; }
+
+th{
+background:#1a237e;
+color:white;
+}
 
 .invoice{
-    margin-top:25px;
-    border:2px solid #000;
-    padding:15px;
+margin-top:25px;
+border:2px solid #000;
+padding:15px;
 }
+
 .footer{
-    text-align:center;
-    padding:20px;
-    font-size:14px;
+text-align:center;
+padding:20px;
+font-size:14px;
 }
+
 </style>
 
 </head>
 
 <body>
-
-<!-- ===== HEADER MENU ===== -->
 
 <div class="navbar">
 <a href="index.html">Home</a>
@@ -105,46 +122,54 @@ th{ background:#1a237e; color:white; }
 </div>
 
 <div class="container">
+
 <h2>GST Invoice Generator</h2>
 
 <h3>Seller Details</h3>
+
 <input id="sname" placeholder="Business Name">
 <input id="sgstin" placeholder="GSTIN">
 <input id="saddress" placeholder="Address">
 
 <h3>Customer Details</h3>
+
 <input id="cname" placeholder="Customer Name">
 <input id="cgstin" placeholder="Customer GSTIN (Optional)">
 <input id="caddress" placeholder="Customer Address">
 
 <h3>Invoice Info</h3>
+
 <input id="invno" placeholder="Invoice Number">
 <input id="date" type="date">
 
 <h3>Item Details</h3>
+
 <table id="items">
+
 <tr>
 <th>Description</th>
 <th>Qty</th>
 <th>Rate</th>
 <th>Amount</th>
 </tr>
+
 <tr>
 <td><input class="desc"></td>
-<td><input class="qty" type="number"></td>
-<td><input class="rate" type="number"></td>
+<td><input class="qty" type="number" oninput="calculateAmounts()"></td>
+<td><input class="rate" type="number" oninput="calculateAmounts()"></td>
 <td class="amt">0</td>
 </tr>
+
 </table>
 
 <button onclick="addRow()">Add Item</button> <button onclick="generateInvoice()">Generate Invoice</button> <button onclick="downloadPDF()">Download PDF</button> <button onclick="window.print()">Print</button>
 
 <div id="output"></div>
+
 </div>
 
-<!-- ===== FOOTER ===== -->
-
 <hr>
+
 <div class="footer">
 © 2026 Legotax | Online CA Services <br>
 Need GST Filing or ITR Help? Call/WhatsApp: <b>8076054114</b><br>
@@ -154,69 +179,27 @@ Email: support@legotax.in
 <script>
 
 function addRow(){
+
 let table=document.getElementById("items");
+
 let row=table.insertRow();
+
 row.innerHTML=`
 <td><input class="desc"></td>
-<td><input class="qty" type="number"></td>
-<td><input class="rate" type="number"></td>
+<td><input class="qty" type="number" oninput="calculateAmounts()"></td>
+<td><input class="rate" type="number" oninput="calculateAmounts()"></td>
 <td class="amt">0</td>`;
+
 }
 
-function generateInvoice(){
+function calculateAmounts(){
 
 let rows=document.querySelectorAll("#items tr");
-let subtotal=0;
 
 for(let i=1;i<rows.length;i++){
-let qty=rows[i].querySelector(".qty").value || 0;
-let rate=rows[i].querySelector(".rate").value || 0;
-let amount=qty*rate;
-rows[i].querySelector(".amt").innerText=amount.toFixed(2);
-subtotal+=amount;
-}
 
-let cgst=subtotal*0.09;
-let sgst=subtotal*0.09;
-let total=subtotal+cgst+sgst;
+let qty=parseFloat(rows[i].querySelector(".qty").value)||0;
 
-document.getElementById("output").innerHTML=`
-<div class="invoice">
+let rate=parseFloat(rows[i].querySelector(".rate").value)||0;
 
-<h3>${document.getElementById("sname").value}</h3>
-GSTIN: ${document.getElementById("sgstin").value}<br>
-${document.getElementById("saddress").value}<br>
-
-<b>Support:</b> 8076054114<br>
-<b>Email:</b> support@legotax.in
-
-<hr>
-
-<b>Bill To:</b><br>
-${document.getElementById("cname").value}<br>
-GSTIN: ${document.getElementById("cgstin").value}<br>
-${document.getElementById("caddress").value}
-
-<hr>
-Invoice No: ${document.getElementById("invno").value}<br>
-Date: ${document.getElementById("date").value}
-
-<h3>Totals</h3>
-Subtotal: ₹${subtotal.toFixed(2)}<br>
-CGST (9%): ₹${cgst.toFixed(2)}<br>
-SGST (9%): ₹${sgst.toFixed(2)}<br>
-<b>Grand Total: ₹${total.toFixed(2)}</b>
-
-</div>`;
-}
-
-async function downloadPDF(){
-const { jsPDF } = window.jspdf;
-let doc=new jsPDF();
-doc.text(document.getElementById("output").innerText,10,10);
-doc.save("invoice.pdf");
-}
-</script>
-
-</body>
-</html>
+let amount
